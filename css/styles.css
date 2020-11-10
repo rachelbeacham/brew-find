@@ -1,0 +1,11 @@
+body {
+  font-family: 'Barlow', sans-serif;
+}
+header, footer {
+  background-color: #FF5732;
+  opacity: 90%;
+}
+.name {
+  color: white;
+  font-weight: bold;
+}
