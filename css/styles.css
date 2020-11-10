@@ -8,11 +8,13 @@ header, footer {
 .text-center {
   text-align: center
 }
+
 .name {
   color: white;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 2rem;
 }
+
 .location-div {
   margin: 1rem 0;
 }
@@ -32,10 +34,33 @@ header, footer {
   outline: none;
   font-size: 1rem;
 }
+.results {
+  color: #AAAAAA;
+  justify-content: left;
+  font-weight: 500;
+}
 
 .image {
   width: 100%;
+
 }
+
+.column p, .column h4,
+.col-third {
+  margin: .5rem;
+}
+
+.add-favorites-link {
+  color: #0645AD;
+}
+
+.lg-col-half {
+  border-bottom: 1px solid rgba(170, 170, 170, .8);
+  margin: 1rem 0;
+
+  padding-bottom: 1rem;
+}
+
 .search, .star {
   color:  white;
   font-size: 2.5rem;
