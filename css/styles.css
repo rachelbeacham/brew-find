@@ -33,7 +33,9 @@ header, footer {
   font-size: 1rem;
 }
 
-
+.image {
+  width: 100%;
+}
 .search, .star {
   color:  white;
   font-size: 2.5rem;

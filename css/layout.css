@@ -6,3 +6,15 @@
 .col-half {
   width: 50%
 }
+
+.col-third {
+  width: calc(100% / 3);
+}
+
+.col-2-thirds {
+  width: calc((100% / 3) * 2);
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
