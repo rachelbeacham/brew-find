@@ -13,6 +13,26 @@ header, footer {
   font-weight: bold;
   font-size: 2rem;
 }
+.location-div {
+  margin: 1rem 0;
+}
+
+.zip-input {
+  width: 75%;
+  height: 3rem;
+  border: none;
+  background-color: #F2EFEF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25)  ;
+}
+
+.zip-input::placeholder,
+.zip-input:focus {
+  color: #AAAAAA;
+  padding-left: .4rem;
+  outline: none;
+  font-size: 1rem;
+}
+
 
 .search, .star {
   color:  white;
