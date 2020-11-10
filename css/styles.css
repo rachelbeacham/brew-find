@@ -40,24 +40,37 @@ header, footer {
   font-weight: 500;
 }
 
-.image {
-  width: 100%;
-
+.image-div {
+  position: relative;
 }
 
-.column p, .column h4,
-.col-third {
+.image-div::before {
+  content: "";
+  background-image: url("../images/beer-cheers.png");
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  opacity: .3;
+}
+
+.column p {
+  position: relative;
   margin: .5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  opacity: 100%;
 }
 
 .add-favorites-link {
   color: #0645AD;
 }
 
-.lg-col-half {
+.col-half {
   border-bottom: 1px solid rgba(170, 170, 170, .8);
   margin: 1rem 0;
-
   padding-bottom: 1rem;
 }
 

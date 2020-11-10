@@ -2,19 +2,35 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .col-half {
+  display: flex;
+  justify-content: center;
+}
+
+.col,
+.col-half {
+  width: 100%;
+}
+
+.half {
   width: 50%;
 }
 
-.col-third {
-  width: calc(100% / 3);
-}
-.col-2-thirds {
-  width: calc((100% / 3) * 2);
-}
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.image-div {
+  width: 80%
+}
+
+
+@media only screen and (min-width: 768px) {
+  .col-half {
+    width: 50%;
+  }
 }
