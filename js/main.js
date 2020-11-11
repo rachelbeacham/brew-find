@@ -5,7 +5,7 @@ var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
 
 $inputForm.addEventListener('submit', formSubmitted);
-optionList.addEventListener('click', optionSelected);
+$optionList.addEventListener('click', optionSelected);
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -26,21 +26,29 @@ function formSubmitted(e) {
 }
 
 function optionSelected(e) {
-  if (e.target.className === 'col-half') {
+  console.log(e.target)
+  if (e.target.tagName === 'P' || e.target.className === 'image-div') {
   data.view = 'brewery-details';
   viewSwapping(data);
+  }
 }
 
 function viewSwapping(data) {
    if (data.view === 'welcome') {
      $dataViews[0].className = 'data-view';
      $dataViews[1].className = 'data-view hidden';
-     $dataViews[2].className
+     $dataViews[2].className = 'data-view hidden';
    }
    if (data.view === 'brewery-options') {
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view';
+    $dataViews[2].className = 'data-view hidden';
    }
+  if (data.view === 'brewery-details') {
+    $dataViews[0].className = 'data-view hidden';
+    $dataViews[1].className = 'data-view hidden';
+    $dataViews[2].className = 'data-view';
+  }
 }
 
 function renderOptions(data) {
