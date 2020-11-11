@@ -1,0 +1,35 @@
+form {
+  display: flex;
+  justify-content: space-around;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.col-half {
+  display: flex;
+  justify-content: center;
+}
+.col,
+.col-half {
+  width: 100%;
+}
+.hidden {
+  display: none;
+}
+.half {
+  width: 50%;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.image-div {
+  width: 80%
+}
+@media only screen and (min-width: 540px) {
+  .col-half {
+    width: 50%;
+  }
+}
