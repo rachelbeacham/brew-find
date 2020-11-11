@@ -1,13 +1,15 @@
-var $inputForm = document.querySelector('.city-input-form')
-var $cityInput = document.querySelector('.city-input')
-var $optionRow = document.querySelector('.option-row')
-var $dataViews = document.querySelectorAll('.data-view')
+var $inputForm = document.querySelector('.city-input-form');
+var $cityInput = document.querySelector('.city-input');
+var $dataViews = document.querySelectorAll('.data-view');
+var $resultsText = document.querySelector('.results-text');
+var $optionList = document.querySelector('.option-list');
+console.log($optionList)
 
 
 $inputForm.addEventListener('submit', formSubmitted);
 
 function formSubmitted(e) {
-  var brewArray = [];
+
   e.preventDefault();
   data.location = $cityInput.value
   data.view = 'brewery-options';
@@ -17,17 +19,17 @@ function formSubmitted(e) {
   xhr.open('GET', 'https://api.openbrewerydb.org/breweries?by_city=' + data.location, true);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    brewArray = xhr.response;
+    data.brewArray = xhr.response;
     // brewArray is filled with correct data
-    console.log('brewArray:', brewArray);
+    console.log('brewArray:', data.brewArray);
     console.log($dataViews[1])
-    for (var i = 0; i < brewArray.length; i++) {
-      $dataViews[1].appendChild(renderOptions(data))
+    for (var i = 0; i < data.brewArray.length; i++) {
+      $optionList.appendChild(renderOptions(data.brewArray[i]))
     }
 
   });
   //brewArray is now empty
-  console.log(brewArray)
+  console.log(data.brewArray)
   xhr.send();
 }
 
@@ -43,14 +45,7 @@ function viewSwapping(data) {
 }
 
 function renderOptions(data) {
-    var $rowDiv = document.createElement('div');
-    $rowDiv.className = 'row';
-
-    var $resultsCol = document.createElement('div');
-    $resultsCol.className = 'col results text-center';
-
-    var $resultsText = document.createElement('h3');
-    $resultsText.textContent = 'Results in ' + data.location;
+   $resultsText.textContent = 'Results in ' + data.city;
 
     var $colHalfDiv = document.createElement('div');
     $colHalfDiv.className = 'col-half';
@@ -62,24 +57,22 @@ function renderOptions(data) {
     $brewInfoCol.className = 'column brew-info text-center';
 
     var $brewName = document.createElement('p');
-    $brewName.textContent = brewArray[i].name;
+    $brewName.textContent = data.name;
 
     var $brewAddress = document.createElement('p');
-    $brewAddress.textContent = brewArray[i].street + ', ' + brewArray[i].city + ' ' + brewArray[i].state + ' ' + brewArray[i].postal_code
+    $brewAddress.textContent = data.street + ', ' + data.city + ' ' + data.state + ' ' + data.postal_code;
 
     var $addToFavorites = document.createElement('p');
     $addToFavorites.textContent = 'Add to favorites';
-    $addToFavorites.className = 'add-to-favorites-link';
+    $addToFavorites.className = 'add-favorites-link';
 
-    $rowDiv.appendChild($resultsCol);
-    $resultsCol.appendChild($resultsText);
-    $rowDiv.appendChild($colHalfDiv)
+
     $colHalfDiv.appendChild($imageDiv);
     $imageDiv.appendChild($brewInfoCol);
     $brewInfoCol.appendChild($brewName);
     $brewInfoCol.appendChild($brewAddress);
     $brewInfoCol.appendChild($addToFavorites);
     //not showing up
-    console.log($rowDiv);
-    return $rowDiv;
+    console.log($colHalfDiv);
+    return $colHalfDiv;
 }
