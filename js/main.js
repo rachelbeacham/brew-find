@@ -5,6 +5,7 @@ var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
 
 $inputForm.addEventListener('submit', formSubmitted);
+optionList.addEventListener('click', optionSelected);
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -23,6 +24,7 @@ function formSubmitted(e) {
   });
   xhr.send();
 }
+
 
 function viewSwapping(data) {
    if (data.view === 'welcome') {

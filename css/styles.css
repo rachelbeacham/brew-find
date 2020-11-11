@@ -28,16 +28,17 @@ footer {
   margin-left: 2rem;
   font-weight: 500;
 }
+.container {
+  min-height: 100vh;
+  position: relative;
+}
 .gray-text {
   color: #959595;
 }
 .blue-text {
   color: #0645AD;
 }
-.container {
-  min-height: 100vh;
-  position: relative;
-}
+
 .text-center {
   text-align: center
 }
