@@ -19,7 +19,7 @@ header, footer {
   margin: 1rem 0;
 }
 
-.zip-input {
+.city-input {
   width: 75%;
   height: 3.5rem;
   border: none;
@@ -27,16 +27,18 @@ header, footer {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25);
 }
 
-.zip-input::placeholder,
-.zip-input:focus {
+.city-input::placeholder,
+.city-input:focus {
   color: #AAAAAA;
   padding-left: .4rem;
   outline: none;
   font-size: 1rem;
 }
+button {
+  display: inline;
+}
 .results {
   color: #AAAAAA;
-  justify-content: left;
   font-weight: 500;
 }
 

@@ -1,10 +1,13 @@
 .row {
-  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
+form {
+  display: flex;
+  justify-content: space-around;
 
+}
 .col-half {
   display: flex;
   justify-content: center;
@@ -13,6 +16,10 @@
 .col,
 .col-half {
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 .half {
@@ -28,7 +35,7 @@
   width: 80%
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 540px) {
   .col-half {
     width: 50%;
   }

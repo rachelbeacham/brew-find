@@ -20,15 +20,23 @@
   </header>
 
   <main>
-    <form>
-      <div class="row location-div">
-        <input class="zip-input" type="number" maxlength="5" minlength="5" required placeholder="Enter Your Zip Code">
-      </div>
-    </form>
 
-    <div class="row results">
+    <div class="data-view column" data-view="welcome">
+      <h2>Hello There!</h2>
+      <h3>Enter your city for a list of all the options near you!</h3>
+      <form class="city-input-form">
+        <div class="row location-div">
+          <input class="city-input" type="text" required placeholder="Enter Your City">
+          <button type="submit">GO</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="data-view hidden" data-view="brewery-options">
+
+    <div class="row results text-center">
       <div class="col">
-        <p>Results near 36201</p>
+        <h3>Results in Anniston<h3>
       </div>
     </div>
 
@@ -52,9 +60,7 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
       <div class="col-half">
         <div class="image-div">
           <div class="column brew-info text-center">
@@ -74,8 +80,9 @@
           </div>
         </div>
       </div>
-    </div>
 
+    </div>
+    </div>
   </main>
 
   <footer>
