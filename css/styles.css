@@ -6,53 +6,17 @@ header, footer {
   width: 100%;
   position: fixed;
 }
-.container {
-  min-height: 100vh;
-  position: relative;
-}
 
 main {
   margin-top: 5.1rem;
   margin-bottom: 3.7rem;
 }
-
 header {
   top: 0;
   z-index: 2
 }
-
 footer {
   bottom: 0;
-}
-
-.text-center {
-  text-align: center
-}
-
-.name {
-  color: white;
-  font-weight: 500;
-  font-size: 2rem;
-}
-
-.location-div {
-  margin: 1rem 0;
-}
-
-.city-input {
-  width: 60%;
-  height: 3.5rem;
-  border: none;
-  background-color: #F2EFEF;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25);
-}
-
-.city-input::placeholder,
-.city-input:focus {
-  color: #AAAAAA;
-  padding-left: .4rem;
-  outline: none;
-  font-size: 1rem;
 }
 button {
   background-color: rgba(255,  87,  50, .9);
@@ -64,16 +28,43 @@ button {
   margin-left: 2rem;
   font-weight: 500;
 }
+.container {
+  min-height: 100vh;
+  position: relative;
+}
+.text-center {
+  text-align: center
+}
+.name {
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
+}
+.location-div {
+  margin: 1rem 0;
+}
+.city-input {
+  width: 60%;
+  height: 3.5rem;
+  border: none;
+  background-color: #F2EFEF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25);
+}
+.city-input::placeholder,
+.city-input:focus {
+  color: #AAAAAA;
+  padding-left: .4rem;
+  outline: none;
+  font-size: 1rem;
+}
 .results {
   color: #AAAAAA;
   font-weight: 500;
 }
-
 .image-div {
   position: relative;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25);
 }
-
 .image-div::before {
   content: "";
   background-image: url("../images/beer-cheers.png");
@@ -85,24 +76,20 @@ button {
   right: 0px;
   opacity: .3;
 }
-
 .column p {
   position: relative;
   margin: .5rem;
   font-weight: 500;
   font-size: 1.5rem;
 }
-
 .add-favorites-link {
   color: #0645AD;
 }
-
 .col-half {
   border-bottom: 1px solid rgba(170, 170, 170, .8);
   margin: 1rem 0;
   padding-bottom: 1rem;
 }
-
 .search, .star {
   color:  white;
   font-size: 2.5rem;

@@ -3,8 +3,6 @@ var $cityInput = document.querySelector('.city-input');
 var $dataViews = document.querySelectorAll('.data-view');
 var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
-console.log($optionList)
-
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -19,14 +17,10 @@ function formSubmitted(e) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.brewArray = xhr.response;
-    console.log('brewArray:', data.brewArray);
-    console.log($dataViews[1])
     for (var i = 0; i < data.brewArray.length; i++) {
       $optionList.appendChild(renderOptions(data.brewArray[i]))
     }
-
   });
-
   xhr.send();
 }
 
@@ -63,13 +57,11 @@ function renderOptions(data) {
     $addToFavorites.textContent = 'Add to favorites';
     $addToFavorites.className = 'add-favorites-link';
 
-
     $colHalfDiv.appendChild($imageDiv);
     $imageDiv.appendChild($brewInfoCol);
     $brewInfoCol.appendChild($brewName);
     $brewInfoCol.appendChild($brewAddress);
     $brewInfoCol.appendChild($addToFavorites);
-    //not showing up
-    console.log($colHalfDiv);
+
     return $colHalfDiv;
 }
