@@ -55,7 +55,7 @@ function renderOptions(data) {
 
     var $addToFavorites = document.createElement('p');
     $addToFavorites.textContent = 'Add to favorites';
-    $addToFavorites.className = 'add-favorites-link';
+    $addToFavorites.className = 'blue-text';
 
     $colHalfDiv.appendChild($imageDiv);
     $imageDiv.appendChild($brewInfoCol);
