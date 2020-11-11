@@ -9,7 +9,6 @@ console.log($optionList)
 $inputForm.addEventListener('submit', formSubmitted);
 
 function formSubmitted(e) {
-
   e.preventDefault();
   data.location = $cityInput.value
   data.view = 'brewery-options';
@@ -20,7 +19,6 @@ function formSubmitted(e) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.brewArray = xhr.response;
-    // brewArray is filled with correct data
     console.log('brewArray:', data.brewArray);
     console.log($dataViews[1])
     for (var i = 0; i < data.brewArray.length; i++) {
@@ -28,8 +26,7 @@ function formSubmitted(e) {
     }
 
   });
-  //brewArray is now empty
-  console.log(data.brewArray)
+
   xhr.send();
 }
 
