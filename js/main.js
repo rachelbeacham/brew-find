@@ -25,11 +25,17 @@ function formSubmitted(e) {
   xhr.send();
 }
 
+function optionSelected(e) {
+  if (e.target.className === 'col-half') {
+  data.view = 'brewery-details';
+  viewSwapping(data);
+}
 
 function viewSwapping(data) {
    if (data.view === 'welcome') {
      $dataViews[0].className = 'data-view';
-     $dataViews[1].className = 'data-view hidden'
+     $dataViews[1].className = 'data-view hidden';
+     $dataViews[2].className
    }
    if (data.view === 'brewery-options') {
     $dataViews[0].className = 'data-view hidden';
