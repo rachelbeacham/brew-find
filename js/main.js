@@ -2,64 +2,84 @@ var $inputForm = document.querySelector('.city-input-form')
 var $cityInput = document.querySelector('.city-input')
 var $optionRow = document.querySelector('.option-row')
 var $dataViews = document.querySelectorAll('.data-view')
-var dataArray = [];
+
 
 $inputForm.addEventListener('submit', formSubmitted);
 
-function formSubmitted(event) {
-  event.preventDefault();
+function formSubmitted(e) {
+  var brewArray = [];
+  e.preventDefault();
   data.location = $cityInput.value
+  data.view = 'brewery-options';
+  viewSwapping(data);
   $inputForm.reset();
-  viewSwapping('brewery-options');
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.openbrewerydb.org/breweries?by_city=' + data.location, true);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    brewArray = xhr.response;
+    // brewArray is filled with correct data
+    console.log('brewArray:', brewArray);
+    console.log($dataViews[1])
+    for (var i = 0; i < brewArray.length; i++) {
+      $dataViews[1].appendChild(renderOptions(data))
+    }
+
+  });
+  //brewArray is now empty
+  console.log(brewArray)
+  xhr.send();
 }
 
-function viewSwapping(currentValue) {
-   if (currentValue === 'welcome') {
+function viewSwapping(data) {
+   if (data.view === 'welcome') {
      $dataViews[0].className = 'data-view';
      $dataViews[1].className = 'data-view hidden'
    }
-   if (currentValue === 'brewery-options') {
-     $dataViews[0].className = 'data-view hidden'
-     $dataViews[1].classList = 'data-view'
-     renderOptions();
+   if (data.view === 'brewery-options') {
+    $dataViews[0].className = 'data-view hidden';
+    $dataViews[1].className = 'data-view';
    }
 }
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.openbrewerydb.org/breweries?by_city=' + data.location);
-xhr.responseType = 'json';
-xhr.addEventListener('load', function () {
-  dataArray = xhr.response;
-  console.log('dataArray:', dataArray);
-});
-xhr.send();
-
 function renderOptions(data) {
-  var $colHalfDiv = document.createElement('div');
-  $colHalfDiv.className = 'col-half';
+    var $rowDiv = document.createElement('div');
+    $rowDiv.className = 'row';
 
-  var $imageDiv = document.createElement('div');
-  $imageDiv.className = 'image-div';
+    var $resultsCol = document.createElement('div');
+    $resultsCol.className = 'col results text-center';
 
-  var $brewInfoCol = document.createElement('div');
-  $brewInfoCol.className = 'column brew-info text-center';
+    var $resultsText = document.createElement('h3');
+    $resultsText.textContent = 'Results in ' + data.location;
 
-  var $brewName = document.createElement('p');
-  $brewName.textContent = dataArray[i].name;
+    var $colHalfDiv = document.createElement('div');
+    $colHalfDiv.className = 'col-half';
 
-  var $brewAddress = document.createElement('p');
-  $brewAddress.textContent = dataArray[i].street + ', ' + dataArray[i].city + ' ' + dataArray[i].state + ' ' + dataArray[i].postal_code
+    var $imageDiv = document.createElement('div');
+    $imageDiv.className = 'image-div';
 
-  var $addToFavorites = document.createElement('p');
-  $addToFavorites.textContent = 'Add to favorites';
-  $addToFavorites.className = 'add-to-favorites-link';
+    var $brewInfoCol = document.createElement('div');
+    $brewInfoCol.className = 'column brew-info text-center';
 
+    var $brewName = document.createElement('p');
+    $brewName.textContent = brewArray[i].name;
 
-  $colHalfDiv.appendChild($imageDiv);
-  $imageDiv.appendChild($brewInfoCol);
-  $brewInfoCol.appendChild($brewName);
-  $brewInfoCol.appendChild($brewAddress);
-  $brewInfoCol.appendChild($addToFavorites);
+    var $brewAddress = document.createElement('p');
+    $brewAddress.textContent = brewArray[i].street + ', ' + brewArray[i].city + ' ' + brewArray[i].state + ' ' + brewArray[i].postal_code
 
-  return $colHalfDiv;
-  }
+    var $addToFavorites = document.createElement('p');
+    $addToFavorites.textContent = 'Add to favorites';
+    $addToFavorites.className = 'add-to-favorites-link';
+
+    $rowDiv.appendChild($resultsCol);
+    $resultsCol.appendChild($resultsText);
+    $rowDiv.appendChild($colHalfDiv)
+    $colHalfDiv.appendChild($imageDiv);
+    $imageDiv.appendChild($brewInfoCol);
+    $brewInfoCol.appendChild($brewName);
+    $brewInfoCol.appendChild($brewAddress);
+    $brewInfoCol.appendChild($addToFavorites);
+    //not showing up
+    console.log($rowDiv);
+    return $rowDiv;
+}

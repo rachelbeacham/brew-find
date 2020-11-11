@@ -1,4 +1,6 @@
 /* exported data */
 var data = {
-  location: 'Austin'
+  location: 'Austin',
+  view: 'welcome',
+  brewArray: []
 }
