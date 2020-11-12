@@ -31,6 +31,12 @@ window.addEventListener('beforeunload', function () {
   localStorage.setItem('favorites', favoritesJson);
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  var favoritesData = localStorage.getItem('favorites');
+  if (favoritesData !== null) {
+    data.favorties = JSON.parse(favoritesData);
+  }
+});
 
 function formSubmitted(e) {
   e.preventDefault();
