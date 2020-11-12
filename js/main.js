@@ -12,6 +12,7 @@ var $footerStar = document.querySelector('.footer-star');
 var $favoritesButton = document.querySelector('.favorites-button');
 var $backButton = document.querySelector('.back-button');
 var $headerName = document.querySelector('.header-name');
+var $favoritesList = document.querySelector('.favorites-list')
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -102,16 +103,25 @@ function viewSwapping(data) {
      $dataViews[0].className = 'data-view';
      $dataViews[1].className = 'data-view hidden';
      $dataViews[2].className = 'data-view hidden';
+     $dataViews[3].className = 'data-view hidden'
    }
    if (data.view === 'brewery-options') {
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view';
     $dataViews[2].className = 'data-view hidden';
+    $dataViews[3].className = 'data-view hidden'
    }
   if (data.view === 'brewery-details') {
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view';
+    $dataViews[3].className = 'data-view hidden'
+  }
+  if (data.view === 'favorites') {
+    $dataViews[0].className = 'data-view hidden';
+    $dataViews[1].className = 'data-view hidden';
+    $dataViews[2].className = 'data-view hidden';
+    $dataViews[3].className = 'data-view'
   }
 }
 
