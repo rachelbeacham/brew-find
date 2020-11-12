@@ -21,15 +21,17 @@
 
   <main>
 
-    <div class="data-view column text-center" data-view="welcome">
-      <h2 class="gray-text">Hello There!</h2>
-      <h3 class="gray-text">Enter your city for a list of all the great brewery options near you!</h3>
-      <form class="row city-input-form">
-        <div class="col location-div">
-          <input class="city-input" type="text" required placeholder="Enter Your City">
-          <button class="search-button" type="submit">GO</button>
-        </div>
-      </form>
+    <div class="data-view" data-view="welcome">
+      <div class="column text-center">
+        <h2 class="gray-text">Hello There!</h2>
+        <h3 class="gray-text">Enter your city for a list of all the great brewery options near you!</h3>
+        <form class="row city-input-form">
+          <div class="col location-div">
+            <input class="city-input" type="text" required placeholder="Enter Your City">
+            <button class="search-button" type="submit">GO</button>
+          </div>
+        </form>
+      </div>
     </div>
 
 
@@ -44,10 +46,10 @@
 
     <div class="data-view hidden" data-view="brewery-details">
       <div class= "column text-center">
-        <h1 class="gray-text">Ballast Point Brewing Company</h1>
-        <h2 class="gray-text">7606 Trade St, San Diego California 92121-2405</h2>
-        <h2><a class="gray-text" href='http://www.ballastpoint.com'>http://www.ballastpoint.com</a></h2>
-        <h2 class="gray-text">Phone: 8586952739</h2>
+        <h1 class="selected-brewery-name gray-text">Ballast Point Brewing Company</h1>
+        <h2 class="selected-brewery-address gray-text">7606 Trade St, San Diego California 92121-2405</h2>
+        <h2><a class="selected-brewery-website gray-text" href='http://www.ballastpoint.com'>http://www.ballastpoint.com</a></h2>
+        <h2 class="selected-brewery-phone gray-text">Phone: 8586952739</h2>
         <div class="row stars">
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
@@ -67,11 +69,11 @@
 
   <footer>
     <div class="row">
-      <div class="half text-center">
-        <i class="fas fa-search search"></i>
+      <div class="half footer-search text-center">
+        <i class="fas fa-search"></i>
       </div>
-      <div class="half text-center">
-        <i class="fas fa-star star"></i>
+      <div class="half footer-star text-center">
+        <i class="fas fa-star"></i>
       </div>
     </div>
   </footer>

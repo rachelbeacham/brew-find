@@ -105,7 +105,8 @@ footer {
   margin: 1rem 0;
   padding-bottom: 1rem;
 }
-.search, .star {
+.footer-search,
+.footer-star {
   color:  white;
   font-size: 2.5rem;
   padding: 10px;
@@ -113,4 +114,8 @@ footer {
 .stars i {
   color: #FF5732;
   margin: 1rem .5rem;
+}
+.brewName {
+  font-size: 1.1rem;
+  text-decoration: underline;
 }

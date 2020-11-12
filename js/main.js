@@ -3,9 +3,19 @@ var $cityInput = document.querySelector('.city-input');
 var $dataViews = document.querySelectorAll('.data-view');
 var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
+var $selectedBreweryName = document.querySelector('.selected-brewery-name');
+var $selectedBreweryAddress = document.querySelector('.selected-brewery-address');
+var $selectedBreweryWebsite = document.querySelector('.selected-brewery-website');
+var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
+var $footerSearch = document.querySelector('.footer-search');
+var $footerStar = document.querySelector('.footer-star');
 
 $inputForm.addEventListener('submit', formSubmitted);
 $optionList.addEventListener('click', optionSelected);
+$footerSearch.addEventListener('click', function() {
+  data.view = 'welcome';
+  viewSwapping(data);
+})
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -27,8 +37,17 @@ function formSubmitted(e) {
 
 function optionSelected(e) {
   console.log(e.target)
-  if (e.target.tagName === 'P' || e.target.className === 'image-div') {
+  if (e.target.className === 'brewName') {
   data.view = 'brewery-details';
+  data.selected.name = e.target.textContent
+  for (var i = 0; i < data.brewArray.length; i++) {
+    if (data.brewArray[i].name === data.selected.name) {
+      $selectedBreweryName.textContent = data.brewArray[i].name;
+      $selectedBreweryAddress.textContent = data.brewArray[i].street;
+      $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
+      $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
+    }
+  }
   viewSwapping(data);
   }
 }
@@ -65,9 +84,11 @@ function renderOptions(data) {
 
     var $brewName = document.createElement('p');
     $brewName.textContent = data.name;
+    $brewName.className = 'brewName';
 
     var $brewAddress = document.createElement('p');
     $brewAddress.textContent = data.street + ', ' + data.city + ' ' + data.state + ' ' + data.postal_code;
+    $brewAddress.className = 'brewAddress';
 
     var $addToFavorites = document.createElement('p');
     $addToFavorites.textContent = 'Add to favorites';
