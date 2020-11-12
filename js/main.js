@@ -9,6 +9,7 @@ var $selectedBreweryWebsite = document.querySelector('.selected-brewery-website'
 var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
+var $favoritesButton = document.querySelector('.favorites-button')
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -93,15 +94,15 @@ function renderOptions(data) {
     $brewAddress.textContent = data.street + ', ' + data.city + ' ' + data.state + ' ' + data.postal_code;
     $brewAddress.className = 'brewAddress';
 
-    var $addToFavorites = document.createElement('p');
-    $addToFavorites.textContent = 'Add to favorites';
-    $addToFavorites.className = 'blue-text';
+  //  var $addToFavorites = document.createElement('p');
+  //  $addToFavorites.textContent = 'Add to favorites';
+  //  $addToFavorites.className = 'blue-text';
 
     $colHalfDiv.appendChild($imageDiv);
     $imageDiv.appendChild($brewInfoCol);
     $brewInfoCol.appendChild($brewName);
     $brewInfoCol.appendChild($brewAddress);
-    $brewInfoCol.appendChild($addToFavorites);
+  //  $brewInfoCol.appendChild($addToFavorites);
 
     return $colHalfDiv;
 }
