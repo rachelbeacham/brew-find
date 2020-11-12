@@ -28,7 +28,7 @@ $footerSearch.addEventListener('click', function() {
 });
 
 $favoritesButton.addEventListener('click', function(){
-  if (data.selected.favorited === false) {
+  if ($favoritesButton.textContent === 'Add to favorites') {
     addToFavorites();
   } else {
     removeFromFavorites();
@@ -38,7 +38,8 @@ $favoritesButton.addEventListener('click', function(){
 $backButton.addEventListener('click', function() {
   data.view = 'brewery-options';
   viewSwapping(data);
-})
+
+});
 
 window.addEventListener('beforeunload', function () {
   var favoritesJson = JSON.stringify(data.favorites);
@@ -93,12 +94,15 @@ function optionSelected(e) {
   }
   for (var j = 0; j < data.favorites.length; j++) {
     if (data.favorites[j].name === data.selected.name) {
+      data.selected.favorited = true;
       $favoritesButton.textContent = 'Remove from favorites';
       $favoritesButton.className = 'favorites-button added';
       $selectedBreweryName.textContent = data.favorites[j].name;
       $selectedBreweryAddress.textContent = data.favorites[j].address;
       $selectedBreweryWebsite.textContent = data.favorites[j].website;
       $selectedBreweryPhone.textContent = data.favorites[j].phone;
+    } else {
+      data.selected.favorited = false;
     }
   }
   viewSwapping(data);
@@ -114,7 +118,6 @@ function addToFavorites() {
   newFavorite.website = $selectedBreweryWebsite.textContent;
   newFavorite.phone = $selectedBreweryPhone.textContent;
   data.favorites.push(newFavorite);
-  data.selected.favorited = true;
 }
 
 function removeFromFavorites() {
