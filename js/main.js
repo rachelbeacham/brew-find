@@ -3,8 +3,21 @@ var $cityInput = document.querySelector('.city-input');
 var $dataViews = document.querySelectorAll('.data-view');
 var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
+var $selectedBreweryName = document.querySelector('.selected-brewery-name');
+var $selectedBreweryAddress = document.querySelector('.selected-brewery-address');
+var $selectedBreweryWebsite = document.querySelector('.selected-brewery-website');
+var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
+var $footerSearch = document.querySelector('.footer-search');
+var $footerStar = document.querySelector('.footer-star');
 
 $inputForm.addEventListener('submit', formSubmitted);
+
+$optionList.addEventListener('click', optionSelected);
+
+$footerSearch.addEventListener('click', function() {
+  data.view = 'welcome';
+  viewSwapping(data);
+})
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -18,21 +31,46 @@ function formSubmitted(e) {
   xhr.addEventListener('load', function () {
     data.brewArray = xhr.response;
     for (var i = 0; i < data.brewArray.length; i++) {
+      if (data.brewArray[i].street !== '' && data.brewArray[i].phone !== '' && data.brewArray[i].website_url !== '' && data.brewArray[i].name !== '')
       $optionList.appendChild(renderOptions(data.brewArray[i]))
     }
   });
   xhr.send();
 }
 
+function optionSelected(e) {
+  if (e.target.className === 'brewName') {
+  data.view = 'brewery-details';
+  data.selected.name = e.target.textContent
+  for (var i = 0; i < data.brewArray.length; i++) {
+    if (data.brewArray[i].name === data.selected.name) {
+      $selectedBreweryName.textContent = data.brewArray[i].name;
+      $selectedBreweryAddress.textContent = data.brewArray[i].street + ', ' + data.brewArray[i].city + ', ' + data.brewArray[i].state + ' ' + data.brewArray[i].postal_code;
+      $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
+      $selectedBreweryWebsite.setAttribute('href', data.brewArray[i].website_url);
+      $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
+    }
+  }
+  viewSwapping(data);
+  }
+}
+
 function viewSwapping(data) {
    if (data.view === 'welcome') {
      $dataViews[0].className = 'data-view';
-     $dataViews[1].className = 'data-view hidden'
+     $dataViews[1].className = 'data-view hidden';
+     $dataViews[2].className = 'data-view hidden';
    }
    if (data.view === 'brewery-options') {
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view';
+    $dataViews[2].className = 'data-view hidden';
    }
+  if (data.view === 'brewery-details') {
+    $dataViews[0].className = 'data-view hidden';
+    $dataViews[1].className = 'data-view hidden';
+    $dataViews[2].className = 'data-view';
+  }
 }
 
 function renderOptions(data) {
@@ -49,13 +87,15 @@ function renderOptions(data) {
 
     var $brewName = document.createElement('p');
     $brewName.textContent = data.name;
+    $brewName.className = 'brewName';
 
     var $brewAddress = document.createElement('p');
     $brewAddress.textContent = data.street + ', ' + data.city + ' ' + data.state + ' ' + data.postal_code;
+    $brewAddress.className = 'brewAddress';
 
     var $addToFavorites = document.createElement('p');
     $addToFavorites.textContent = 'Add to favorites';
-    $addToFavorites.className = 'add-favorites-link';
+    $addToFavorites.className = 'blue-text';
 
     $colHalfDiv.appendChild($imageDiv);
     $imageDiv.appendChild($brewInfoCol);

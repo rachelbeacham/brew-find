@@ -2,5 +2,6 @@
 var data = {
   location: '',
   view: 'welcome',
-  brewArray: []
+  brewArray: [],
+  selected: {}
 }
