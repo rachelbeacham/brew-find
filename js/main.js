@@ -145,6 +145,7 @@ function viewSwapping(data) {
   }
   if (data.view === 'favorites') {
     $headerName.textContent = 'Favorites';
+    $favoritesList.innerHTML = '';
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view hidden';
