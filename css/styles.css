@@ -38,6 +38,9 @@ footer {
 .blue-text {
   color: #0645AD;
 }
+.align-center {
+  align-items: center;
+}
 
 .text-center {
   text-align: center
@@ -60,7 +63,9 @@ footer {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25);
 }
 .city-input::placeholder,
-.city-input:focus {
+.city-input:focus,
+.favorites-button:focus,
+.review-button:focus {
   color: #AAAAAA;
   padding-left: .4rem;
   outline: none;
@@ -118,4 +123,9 @@ footer {
 .brewName {
   font-size: 1.1rem;
   text-decoration: underline;
+}
+.back-button {
+  font-size: 3rem;
+  color: #FF5732;
+  margin: 1rem 0;
 }
