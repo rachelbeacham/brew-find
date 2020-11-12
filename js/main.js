@@ -9,7 +9,8 @@ var $selectedBreweryWebsite = document.querySelector('.selected-brewery-website'
 var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
-var $favoritesButton = document.querySelector('.favorites-button')
+var $favoritesButton = document.querySelector('.favorites-button');
+
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -17,6 +18,8 @@ $optionList.addEventListener('click', optionSelected);
 
 $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
+  data.brewArray = [];
+  data.location = "";
   viewSwapping(data);
 });
 
@@ -59,7 +62,10 @@ function optionSelected(e) {
 }
 
 function addToFavorites() {
-
+  var newFavorite = {};
+  newFavorite.name = $selectedBreweryName.textContent;
+  newFavorite.address = $selectedBreweryAddress.textContent;
+  data.favorties.push(newFavorite)
 }
 
 function viewSwapping(data) {
