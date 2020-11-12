@@ -100,24 +100,28 @@ function addToFavorites() {
 
 function viewSwapping(data) {
    if (data.view === 'welcome') {
+     $headerName.textContent = 'Favorites';
      $dataViews[0].className = 'data-view';
      $dataViews[1].className = 'data-view hidden';
      $dataViews[2].className = 'data-view hidden';
      $dataViews[3].className = 'data-view hidden'
    }
    if (data.view === 'brewery-options') {
+    $headerName.textContent = 'Favorites';
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view';
     $dataViews[2].className = 'data-view hidden';
     $dataViews[3].className = 'data-view hidden'
    }
   if (data.view === 'brewery-details') {
+    $headerName.textContent = 'Favorites';
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view';
     $dataViews[3].className = 'data-view hidden'
   }
   if (data.view === 'favorites') {
+    $headerName.textContent = 'Favorites';
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view hidden';
