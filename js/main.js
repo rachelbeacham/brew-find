@@ -17,6 +17,8 @@ $inputForm.addEventListener('submit', formSubmitted);
 
 $optionList.addEventListener('click', optionSelected);
 
+$favoritesList.addEventListener ('click', optionSelected);
+
 $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   data.brewArray = [];
@@ -93,7 +95,10 @@ function optionSelected(e) {
     if (data.favorites[j].name === data.selected.name) {
       $favoritesButton.textContent = 'Remove from favorites';
       $favoritesButton.className = 'favorites-button added';
-      data.selected.favorited = true;
+      $selectedBreweryName.textContent = data.favorites[j].name;
+      $selectedBreweryAddress.textContent = data.favorites[j].address;
+      $selectedBreweryWebsite.textContent = data.favorites[j].website;
+      $selectedBreweryPhone.textContent = data.favorites[j].phone;
     }
   }
   viewSwapping(data);
@@ -106,6 +111,8 @@ function addToFavorites() {
   var newFavorite = {};
   newFavorite.name = $selectedBreweryName.textContent;
   newFavorite.address = $selectedBreweryAddress.textContent;
+  newFavorite.website = $selectedBreweryWebsite.textContent;
+  newFavorite.phone = $selectedBreweryPhone.textContent;
   data.favorites.push(newFavorite);
   data.selected.favorited = true;
 }
