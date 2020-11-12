@@ -121,7 +121,10 @@ function viewSwapping(data) {
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view'
+    $dataViews[3].className = 'data-view';
+    for (var i = 0; i < data.favorites.length; i++) {
+    $favoritesList.appendChild(renderOptions(data.favorites[i]))
+    }
   }
 }
 
