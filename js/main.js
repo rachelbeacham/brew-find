@@ -1,7 +1,6 @@
 var $inputForm = document.querySelector('.city-input-form');
 var $cityInput = document.querySelector('.city-input');
 var $dataViews = document.querySelectorAll('.data-view');
-var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
 var $selectedBreweryName = document.querySelector('.selected-brewery-name');
 var $selectedBreweryAddress = document.querySelector('.selected-brewery-address');
@@ -10,7 +9,9 @@ var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
 var $favoritesButton = document.querySelector('.favorites-button');
-var $backButton = document.querySelector('.back-button')
+var $backButton = document.querySelector('.back-button');
+var $headerName = document.querySelector('.header-name');
+var $favoritesList = document.querySelector('.favorites-list')
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -20,6 +21,7 @@ $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   data.brewArray = [];
   data.location = "";
+  $optionList.innerHTML = '';
   viewSwapping(data);
 });
 
@@ -31,16 +33,21 @@ $backButton.addEventListener('click', function() {
 })
 
 window.addEventListener('beforeunload', function () {
-  var favoritesJson = JSON.stringify(data.favorties);
+  var favoritesJson = JSON.stringify(data.favorites);
   localStorage.setItem('favorites', favoritesJson);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
   var favoritesData = localStorage.getItem('favorites');
   if (favoritesData !== null) {
-    data.favorties = JSON.parse(favoritesData);
+    data.favorites = JSON.parse(favoritesData);
   }
 });
+
+$footerStar.addEventListener('click', function(){
+  data.view = 'favorites';
+  viewSwapping(data);
+})
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -76,8 +83,8 @@ function optionSelected(e) {
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
     }
   }
-  for (var j = 0; j < data.favorties.length; j++) {
-    if (data.favorties[j].name === data.selected.name) {
+  for (var j = 0; j < data.favorites.length; j++) {
+    if (data.favorites[j].name === data.selected.name) {
       $favoritesButton.textContent = 'Added to favorites!';
       $favoritesButton.className = 'favorites-button added';
     }
@@ -92,30 +99,44 @@ function addToFavorites() {
   var newFavorite = {};
   newFavorite.name = $selectedBreweryName.textContent;
   newFavorite.address = $selectedBreweryAddress.textContent;
-  data.favorties.push(newFavorite)
+  data.favorites.push(newFavorite)
 }
 
 function viewSwapping(data) {
    if (data.view === 'welcome') {
+     $headerName.textContent = 'Brew Find';
      $dataViews[0].className = 'data-view';
      $dataViews[1].className = 'data-view hidden';
      $dataViews[2].className = 'data-view hidden';
+     $dataViews[3].className = 'data-view hidden'
    }
    if (data.view === 'brewery-options') {
+    $headerName.textContent = 'Breweries in '+ data.location;
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view';
     $dataViews[2].className = 'data-view hidden';
+    $dataViews[3].className = 'data-view hidden';
    }
   if (data.view === 'brewery-details') {
+    $headerName.textContent = 'Brew Find';
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view';
+    $dataViews[3].className = 'data-view hidden'
+  }
+  if (data.view === 'favorites') {
+    $headerName.textContent = 'Favorites';
+    $dataViews[0].className = 'data-view hidden';
+    $dataViews[1].className = 'data-view hidden';
+    $dataViews[2].className = 'data-view hidden';
+    $dataViews[3].className = 'data-view';
+    for (var i = 0; i < data.favorites.length; i++) {
+      $favoritesList.appendChild(renderFavorites(data.favorites[i]))
+    }
   }
 }
 
 function renderOptions(data) {
-   $resultsText.textContent = 'Results in ' + data.city;
-
     var $colHalfDiv = document.createElement('div');
     $colHalfDiv.className = 'col-half';
 
@@ -139,4 +160,30 @@ function renderOptions(data) {
     $brewInfoCol.appendChild($brewAddress);
 
     return $colHalfDiv;
+}
+
+function renderFavorites(data) {
+  var $favorieColHalfDiv = document.createElement('div');
+  $favorieColHalfDiv.className = 'col-half';
+
+  var $favoriteImageDiv = document.createElement('div');
+  $favoriteImageDiv.className = 'image-div';
+
+  var $favoriteBrewInfoCol = document.createElement('div');
+  $favoriteBrewInfoCol.className = 'column brew-info text-center';
+
+  var $favoriteBrewName = document.createElement('p');
+  $favoriteBrewName.textContent = data.name;
+  $favoriteBrewName.className = 'brewName';
+
+  var $favoriteBrewAddress = document.createElement('p');
+  $favoriteBrewAddress.textContent = data.address
+  $favoriteBrewAddress.className = 'brewAddress';
+
+  $favorieColHalfDiv.appendChild($favoriteImageDiv);
+  $favoriteImageDiv.appendChild($favoriteBrewInfoCol);
+  $favoriteBrewInfoCol.appendChild($favoriteBrewName);
+  $favoriteBrewInfoCol.appendChild($favoriteBrewAddress);
+
+  return $favorieColHalfDiv;
 }

@@ -4,5 +4,5 @@ var data = {
   view: 'welcome',
   brewArray: [],
   selected: {},
-  favorties: []
+  favorites: []
 }
