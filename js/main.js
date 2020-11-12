@@ -1,7 +1,6 @@
 var $inputForm = document.querySelector('.city-input-form');
 var $cityInput = document.querySelector('.city-input');
 var $dataViews = document.querySelectorAll('.data-view');
-var $resultsText = document.querySelector('.results-text');
 var $optionList = document.querySelector('.option-list');
 var $selectedBreweryName = document.querySelector('.selected-brewery-name');
 var $selectedBreweryAddress = document.querySelector('.selected-brewery-address');
@@ -22,7 +21,7 @@ $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   data.brewArray = [];
   data.location = "";
-  location.reload();
+  $optionList.innerHTML = '';
   viewSwapping(data);
 });
 
@@ -112,12 +111,11 @@ function viewSwapping(data) {
      $dataViews[3].className = 'data-view hidden'
    }
    if (data.view === 'brewery-options') {
-    $headerName.textContent = 'Brew Find';
-    $resultsText.textContent = 'Results in ' + data.location;
+    $headerName.textContent = 'Breweries in '+ data.location;
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view';
     $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view hidden'
+    $dataViews[3].className = 'data-view hidden';
    }
   if (data.view === 'brewery-details') {
     $headerName.textContent = 'Brew Find';

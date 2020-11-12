@@ -130,6 +130,7 @@ footer {
   color: #FF5732;
   margin: 1rem 0;
 }
-.favorites-list {
+.favorites-list,
+.option-list {
   margin-top: 7rem;
 }
