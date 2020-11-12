@@ -11,7 +11,9 @@ var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
 
 $inputForm.addEventListener('submit', formSubmitted);
+
 $optionList.addEventListener('click', optionSelected);
+
 $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   viewSwapping(data);
@@ -29,6 +31,7 @@ function formSubmitted(e) {
   xhr.addEventListener('load', function () {
     data.brewArray = xhr.response;
     for (var i = 0; i < data.brewArray.length; i++) {
+      if (data.brewArray[i].street !== '' && data.brewArray[i].phone !== '' && data.brewArray[i].website_url !== '' && data.brewArray[i].name !== '')
       $optionList.appendChild(renderOptions(data.brewArray[i]))
     }
   });
@@ -36,15 +39,15 @@ function formSubmitted(e) {
 }
 
 function optionSelected(e) {
-  console.log(e.target)
   if (e.target.className === 'brewName') {
   data.view = 'brewery-details';
   data.selected.name = e.target.textContent
   for (var i = 0; i < data.brewArray.length; i++) {
     if (data.brewArray[i].name === data.selected.name) {
       $selectedBreweryName.textContent = data.brewArray[i].name;
-      $selectedBreweryAddress.textContent = data.brewArray[i].street;
+      $selectedBreweryAddress.textContent = data.brewArray[i].street + ', ' + data.brewArray[i].city + ', ' + data.brewArray[i].state + ' ' + data.brewArray[i].postal_code;
       $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
+      $selectedBreweryWebsite.setAttribute('href', data.brewArray[i].website_url);
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
     }
   }
