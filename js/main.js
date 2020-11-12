@@ -17,6 +17,8 @@ $inputForm.addEventListener('submit', formSubmitted);
 
 $optionList.addEventListener('click', optionSelected);
 
+$favoritesList.addEventListener ('click', optionSelected);
+
 $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   data.brewArray = [];
@@ -25,12 +27,19 @@ $footerSearch.addEventListener('click', function() {
   viewSwapping(data);
 });
 
-$favoritesButton.addEventListener('click', addToFavorites);
+$favoritesButton.addEventListener('click', function(){
+  if ($favoritesButton.textContent === 'Add to favorites') {
+    addToFavorites();
+  } else {
+    removeFromFavorites();
+  }
+});
 
 $backButton.addEventListener('click', function() {
   data.view = 'brewery-options';
   viewSwapping(data);
-})
+
+});
 
 window.addEventListener('beforeunload', function () {
   var favoritesJson = JSON.stringify(data.favorites);
@@ -85,8 +94,15 @@ function optionSelected(e) {
   }
   for (var j = 0; j < data.favorites.length; j++) {
     if (data.favorites[j].name === data.selected.name) {
-      $favoritesButton.textContent = 'Added to favorites!';
+      data.selected.favorited = true;
+      $favoritesButton.textContent = 'Remove from favorites';
       $favoritesButton.className = 'favorites-button added';
+      $selectedBreweryName.textContent = data.favorites[j].name;
+      $selectedBreweryAddress.textContent = data.favorites[j].address;
+      $selectedBreweryWebsite.textContent = data.favorites[j].website;
+      $selectedBreweryPhone.textContent = data.favorites[j].phone;
+    } else {
+      data.selected.favorited = false;
     }
   }
   viewSwapping(data);
@@ -94,12 +110,25 @@ function optionSelected(e) {
 }
 
 function addToFavorites() {
-  $favoritesButton.textContent = 'Added to favorites!';
+  $favoritesButton.textContent = 'Remove from favorites';
   $favoritesButton.className = 'favorites-button added';
   var newFavorite = {};
   newFavorite.name = $selectedBreweryName.textContent;
   newFavorite.address = $selectedBreweryAddress.textContent;
-  data.favorites.push(newFavorite)
+  newFavorite.website = $selectedBreweryWebsite.textContent;
+  newFavorite.phone = $selectedBreweryPhone.textContent;
+  data.favorites.push(newFavorite);
+}
+
+function removeFromFavorites() {
+  $favoritesButton.textContent = 'Add to favorites';
+  $favoritesButton.className = 'favorites-button';
+  for (var i = 0; i < data.favorites.length; i++) {
+    if (data.favorites[i].name === data.selected.name) {
+      data.favorites.splice(i, 1);
+      data.selected.favorited = false;
+    }
+  }
 }
 
 function viewSwapping(data) {
@@ -126,6 +155,7 @@ function viewSwapping(data) {
   }
   if (data.view === 'favorites') {
     $headerName.textContent = 'Favorites';
+    $favoritesList.innerHTML = '';
     $dataViews[0].className = 'data-view hidden';
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view hidden';
