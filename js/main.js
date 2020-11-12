@@ -10,7 +10,8 @@ var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
 var $favoritesButton = document.querySelector('.favorites-button');
-var $backButton = document.querySelector('.back-button')
+var $backButton = document.querySelector('.back-button');
+var $headerName = document.querySelector('.header-name');
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -20,6 +21,7 @@ $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   data.brewArray = [];
   data.location = "";
+  location.reload();
   viewSwapping(data);
 });
 
