@@ -77,7 +77,8 @@ footer {
   color: #FF5732;
   font-size: 1.1rem;
 }
-.results {
+
+.results, .added {
   color: #AAAAAA;
   font-weight: 500;
 }

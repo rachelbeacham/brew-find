@@ -10,7 +10,7 @@ var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
 var $favoritesButton = document.querySelector('.favorites-button');
-
+var $backButton = document.querySelector('.back-button')
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -25,6 +25,10 @@ $footerSearch.addEventListener('click', function() {
 
 $favoritesButton.addEventListener('click', addToFavorites);
 
+$backButton.addEventListener('click', function() {
+  data.view = 'brewery-options';
+  viewSwapping(data);
+})
 
 window.addEventListener('beforeunload', function () {
   var favoritesJson = JSON.stringify(data.favorties);
@@ -58,6 +62,8 @@ function formSubmitted(e) {
 }
 
 function optionSelected(e) {
+  $favoritesButton.textContent = 'Add to favorites';
+  $favoritesButton.className = 'favorites-button';
   if (e.target.className === 'brewName') {
   data.view = 'brewery-details';
   data.selected.name = e.target.textContent
@@ -70,11 +76,19 @@ function optionSelected(e) {
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
     }
   }
+  for (var j = 0; j < data.favorties.length; j++) {
+    if (data.favorties[j].name === data.selected.name) {
+      $favoritesButton.textContent = 'Added to favorites!';
+      $favoritesButton.className = 'favorites-button added';
+    }
+  }
   viewSwapping(data);
   }
 }
 
 function addToFavorites() {
+  $favoritesButton.textContent = 'Added to favorites!';
+  $favoritesButton.className = 'favorites-button added';
   var newFavorite = {};
   newFavorite.name = $selectedBreweryName.textContent;
   newFavorite.address = $selectedBreweryAddress.textContent;
@@ -119,15 +133,10 @@ function renderOptions(data) {
     $brewAddress.textContent = data.street + ', ' + data.city + ' ' + data.state + ' ' + data.postal_code;
     $brewAddress.className = 'brewAddress';
 
-  //  var $addToFavorites = document.createElement('p');
-  //  $addToFavorites.textContent = 'Add to favorites';
-  //  $addToFavorites.className = 'blue-text';
-
     $colHalfDiv.appendChild($imageDiv);
     $imageDiv.appendChild($brewInfoCol);
     $brewInfoCol.appendChild($brewName);
     $brewInfoCol.appendChild($brewAddress);
-  //  $brewInfoCol.appendChild($addToFavorites);
 
     return $colHalfDiv;
 }
