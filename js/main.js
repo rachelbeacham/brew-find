@@ -25,6 +25,13 @@ $footerSearch.addEventListener('click', function() {
 
 $favoritesButton.addEventListener('click', addToFavorites);
 
+
+window.addEventListener('beforeunload', function () {
+  var favoritesJson = JSON.stringify(data.favorties);
+  localStorage.setItem('favorites', favoritesJson);
+});
+
+
 function formSubmitted(e) {
   e.preventDefault();
   data.location = $cityInput.value
