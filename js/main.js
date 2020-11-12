@@ -104,6 +104,16 @@ function addToFavorites() {
   data.selected.favorited = true;
 }
 
+function removeFromFavorites() {
+  $favoritesButton.textContent = 'Add to favorites';
+  $favoritesButton.className = 'favorites-button';
+  for (var i = 0; i < data.favorites.length; i++) {
+    if (data.favorites[i].name === $selectedBreweryName.textContent) {
+      data.favorites.splice(i, 1);
+    }
+  }
+}
+
 function viewSwapping(data) {
    if (data.view === 'welcome') {
      $headerName.textContent = 'Brew Find';
