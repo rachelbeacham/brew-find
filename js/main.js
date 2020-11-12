@@ -18,7 +18,9 @@ $optionList.addEventListener('click', optionSelected);
 $footerSearch.addEventListener('click', function() {
   data.view = 'welcome';
   viewSwapping(data);
-})
+});
+
+$favoritesButton.addEventListener('click', addToFavorites);
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -54,6 +56,10 @@ function optionSelected(e) {
   }
   viewSwapping(data);
   }
+}
+
+function addToFavorites() {
+
 }
 
 function viewSwapping(data) {
