@@ -25,7 +25,13 @@ $footerSearch.addEventListener('click', function() {
   viewSwapping(data);
 });
 
-$favoritesButton.addEventListener('click', addToFavorites);
+$favoritesButton.addEventListener('click', function(){
+  if (data.selected.favorited === false) {
+    addToFavorites();
+  } else {
+    removeFromFavorites();
+  }
+});
 
 $backButton.addEventListener('click', function() {
   data.view = 'brewery-options';
@@ -108,8 +114,9 @@ function removeFromFavorites() {
   $favoritesButton.textContent = 'Add to favorites';
   $favoritesButton.className = 'favorites-button';
   for (var i = 0; i < data.favorites.length; i++) {
-    if (data.favorites[i].name === $selectedBreweryName.textContent) {
+    if (data.favorites[i].name === data.selected.name) {
       data.favorites.splice(i, 1);
+      data.selected.favorited = false;
     }
   }
 }
