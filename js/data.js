@@ -3,6 +3,9 @@ var data = {
   location: '',
   view: 'welcome',
   brewArray: [],
-  selected: {},
+  selected: {
+    name: '',
+    favorited: false
+  },
   favorites: []
 }

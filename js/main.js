@@ -85,8 +85,9 @@ function optionSelected(e) {
   }
   for (var j = 0; j < data.favorites.length; j++) {
     if (data.favorites[j].name === data.selected.name) {
-      $favoritesButton.textContent = 'Added to favorites!';
+      $favoritesButton.textContent = 'Remove from favorites';
       $favoritesButton.className = 'favorites-button added';
+      data.selected.favorited = true;
     }
   }
   viewSwapping(data);
@@ -94,12 +95,13 @@ function optionSelected(e) {
 }
 
 function addToFavorites() {
-  $favoritesButton.textContent = 'Added to favorites!';
+  $favoritesButton.textContent = 'Remove from favorites';
   $favoritesButton.className = 'favorites-button added';
   var newFavorite = {};
   newFavorite.name = $selectedBreweryName.textContent;
   newFavorite.address = $selectedBreweryAddress.textContent;
-  data.favorites.push(newFavorite)
+  data.favorites.push(newFavorite);
+  data.selected.favorited = true;
 }
 
 function viewSwapping(data) {
