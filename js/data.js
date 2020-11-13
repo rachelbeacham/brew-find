@@ -6,7 +6,6 @@ var data = {
   selected: {
     name: '',
     favorited: false,
-    numberOfReviews: 0,
   },
   favorites: [],
   reviews: []

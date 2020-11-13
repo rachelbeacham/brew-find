@@ -16,7 +16,7 @@ var $favoritesList = document.querySelector('.favorites-list');
 var $reviewForm = document.querySelector('.review-form');
 var $reviewerName = document.querySelector('#name');
 var $reviewText = document.querySelector('#review');
-var $numberOfReviews = document.querySelector('.number-of-reviews');
+
 
 $inputForm.addEventListener('submit', formSubmitted);
 
