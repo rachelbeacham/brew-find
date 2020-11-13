@@ -9,6 +9,7 @@ var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
 var $favoritesButton = document.querySelector('.favorites-button');
+var $reviewButton = document.querySelector('.review-button')
 var $backButton = document.querySelector('.back-button');
 var $headerName = document.querySelector('.header-name');
 var $favoritesList = document.querySelector('.favorites-list')
@@ -34,6 +35,12 @@ $favoritesButton.addEventListener('click', function(){
     removeFromFavorites();
   }
 });
+
+$reviewButton.addEventListener('click', function(){
+  data.view = 'review-form';
+  viewSwapping(data);
+  console.log(data.selected.name)
+})
 
 $backButton.addEventListener('click', function() {
   data.view = 'brewery-options';

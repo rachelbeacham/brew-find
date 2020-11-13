@@ -113,7 +113,7 @@ input, textarea {
 .add-favorites-link {
   color: #0645AD;
 }
-.col-half:not(:lastChild) {
+.col-half {
   border-bottom: 1px solid rgba(170, 170, 170, .8);
   margin: 1rem 0;
   padding-bottom: 2rem;
@@ -138,7 +138,8 @@ input, textarea {
   margin: 1rem 0;
 }
 .favorites-list,
-.option-list {
+.option-list,
+.write-review-div {
   margin-top: 7rem;
 }
 .rate-experience {
@@ -155,4 +156,7 @@ input, textarea {
   font-weight: 500;
   padding: .5rem 1rem;
   font-size: 1.1rem;
+}
+.review-inputs {
+  border: none;
 }
