@@ -12,9 +12,26 @@ var $favoritesButton = document.querySelector('.favorites-button');
 var $reviewButton = document.querySelector('.review-button')
 var $backButton = document.querySelector('.back-button');
 var $headerName = document.querySelector('.header-name');
-var $favoritesList = document.querySelector('.favorites-list')
+var $favoritesList = document.querySelector('.favorites-list');
+var $reviewForm = document.querySelector('.review-form');
+var $reviewerName = document.querySelector('#name');
+var $reviewText = document.querySelector('#review');
+var $numberOfReviews = document.querySelector('.number-of-reviews');
 
 $inputForm.addEventListener('submit', formSubmitted);
+
+$reviewForm.addEventListener('submit', function (e){
+  e.preventDefault();
+  data.selected.numberOfReviews++
+  var newReview = {
+    person: $reviewerName.value,
+    reviewText: $reviewText.value,
+    breweryReviewed: data.selected.name
+  };
+  data.reviews.push(newReview);
+  data.view = 'brewery-details'
+  viewSwapping(data);
+})
 
 $optionList.addEventListener('click', optionSelected);
 
@@ -83,7 +100,6 @@ function formSubmitted(e) {
   });
   xhr.send();
 }
-
 function optionSelected(e) {
   $favoritesButton.textContent = 'Add to favorites';
   $favoritesButton.className = 'favorites-button';
@@ -97,6 +113,7 @@ function optionSelected(e) {
       $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
       $selectedBreweryWebsite.setAttribute('href', data.brewArray[i].website_url);
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
+      $numberOfReviews.textContent = data.selected.numberOfReviews + ' Reviews'
     }
   }
   for (var j = 0; j < data.favorites.length; j++) {
