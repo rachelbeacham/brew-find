@@ -78,6 +78,8 @@ window.addEventListener('beforeunload', function () {
   localStorage.setItem('favorites', favoritesJson);
   var reviewsJson = JSON.stringify(data.reviews);
   localStorage.setItem('reviews', reviewsJson);
+  var ratingsJson = JSON.stringify(data.ratings);
+  localStorage.setItem('ratings', ratingsJson);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -88,6 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var reviewsData = localStorage.getItem('reviews');
   if (reviewsData !== null) {
     data.reviews = JSON.parse(reviewsData);
+  }
+  var ratingsData = localStorage.getItem('ratings');
+  if (ratingsData !== null) {
+    data.ratings = JSON.parse(ratingsData);
   }
 });
 
@@ -113,9 +119,7 @@ function updateRatingStars() {
   for (var j = 0; j < data.ratings.length; j++) {
     if (data.ratings[j].breweryRated === data.selected.name) {
       var current = data.ratings[j];
-      console.log($ratingStars)
       for (var i = 0; i < $ratingStars.length; i++) {
-        console.log($ratingStars[i].getAttribute('star') <= current.rating)
         if ($ratingStars[i].getAttribute('star') <= current.rating) {
         $ratingStars[i].className = 'fas fa-star rating-star star-red';
         } else {
