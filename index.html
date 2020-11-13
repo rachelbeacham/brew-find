@@ -46,12 +46,15 @@
         <h2 class="selected-brewery-address gray-text"></h2>
         <h2><a class="selected-brewery-website gray-text"></a></h2>
         <h2 class="selected-brewery-phone gray-text"></h2>
-        <div class="row stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+        <div class="column">
+          <h2 class="rate-experience">Please rate your experience!</h2>
+          <div class="row stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
         </div>
         <h2 class="blue-text">48 Reviews</h2>
         <div class="col">
@@ -69,6 +72,19 @@
       <div class="row favorites-list">
 
       </div>
+    </div>
+
+    <div class="data-view" data-view="review-form">
+      <h2 class="gray-text text-center">Write a Review!</h2>
+      <form class="review-form">
+          <div class="col-half column">
+            <label for="name">Name:</label>
+            <input required name="name" id="name" type="text">
+            <label for="review">Tell us about your experience:</label>
+            <textarea required name="review" id="review" type="text" rows="6"></textarea>
+            <button type="submit">Submit</button>
+          </div>
+      </form>
     </div>
 
   </main>

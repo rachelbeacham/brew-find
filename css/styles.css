@@ -18,6 +18,12 @@ header {
 footer {
   bottom: 0;
 }
+input, textarea {
+  resize: none;
+  margin: 1rem 0;
+  border: 1px solid #AAAAAA;
+}
+
 .search-button {
   background-color: rgba(255,  87,  50, .9);
   color: white;
@@ -133,4 +139,7 @@ footer {
 .favorites-list,
 .option-list {
   margin-top: 7rem;
+}
+.rate-experience {
+  color: #FF5732;
 }
