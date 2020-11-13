@@ -8,5 +8,6 @@ var data = {
     favorited: false,
   },
   favorites: [],
-  reviews: []
+  reviews: [],
+  ratings: []
 }

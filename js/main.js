@@ -96,19 +96,41 @@ $footerStar.addEventListener('click', function(){
   viewSwapping(data);
 })
 
-$ratingStarsDiv.addEventListener('click', function(e){
-  if (e.target.className === 'fas fa-star rating-star') {
-   var starSelected = e.target.getAttribute('star');
+$ratingStarsDiv.addEventListener('click', starClicked)
 
-   for (var i = 0; i < $ratingStars.length; i++) {
-     if ($ratingStars[i].getAttribute ('star') <= starSelected) {
-       $ratingStars[i].className = 'fas fa-star rating-star star-red';
-     } else {
-       $ratingStars[i].className = 'fas fa-star rating-star star-gray';
-     }
-   }
+function starClicked(e) {
+  if (e.target.tagName === 'I') {
+    var starSelected = e.target.getAttribute('star');
+    var newRating = {}
+    newRating.breweryRated = data.selected.name
+    newRating.rating = starSelected
+    data.ratings.push(newRating);
+    updateRatingStars();
   }
-})
+};
+
+function updateRatingStars() {
+  for (var j = 0; j < data.ratings.length; j++) {
+    if (data.ratings[j].breweryRated === data.selected.name) {
+      var current = data.ratings[j];
+      console.log($ratingStars)
+      for (var i = 0; i < $ratingStars.length; i++) {
+        console.log($ratingStars[i].getAttribute('star') <= current.rating)
+        if ($ratingStars[i].getAttribute('star') <= current.rating) {
+        $ratingStars[i].className = 'fas fa-star rating-star star-red';
+        } else {
+          $ratingStars[i].className = 'fas fa-star rating-star star-gray';
+        }
+      }
+      break;
+    }
+    else {
+      for (var k = 0; k < $ratingStars.length; k++) {
+      $ratingStars[k].className = 'fas fa-star rating-star star-gray';
+      }
+    }
+  }
+}
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -128,12 +150,14 @@ function formSubmitted(e) {
   });
   xhr.send();
 }
+
 function optionSelected(e) {
   $reviewSection.innerHTML = '';
   $favoritesButton.textContent = 'Add to favorites';
   $favoritesButton.className = 'favorites-button';
   $reviewButton.textContent = 'Write a review';
   $reviewButton.className = 'review-button';
+  $ratingStars.className = 'fas fa-star rating-star';
   if (e.target.className === 'brewName') {
   data.view = 'brewery-details';
   data.selected.name = e.target.textContent
@@ -169,15 +193,16 @@ function optionSelected(e) {
       $reviewLabel.textContent = "Reviews you've sent:";
 
       $reviewLabelBox.appendChild($reviewLabel);
-
       $reviewSection.appendChild($reviewLabelBox);
-
       $reviewSection.appendChild(renderReviews(data.reviews[k]))
     }
   }
   viewSwapping(data);
+  updateRatingStars();
   }
 }
+
+
 
 function addToFavorites() {
   $favoritesButton.textContent = 'Remove from favorites';

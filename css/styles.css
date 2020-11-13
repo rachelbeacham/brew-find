@@ -78,8 +78,9 @@ q {
 .city-input::placeholder,
 .city-input:focus,
 .favorites-button:focus,
-.review-button:focus
- {
+.review-button:focus,
+.review-text:focus,
+.reviewer-name:focus {
   color: #AAAAAA;
   padding-left: .4rem;
   outline: none;
@@ -183,5 +184,5 @@ q {
   color: #FF5732;
 }
 .star-gray {
-  color: #F2EFEF;
+  color: #AAAAAA;
 }
