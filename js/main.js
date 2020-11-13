@@ -78,6 +78,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (favoritesData !== null) {
     data.favorites = JSON.parse(favoritesData);
   }
+  var reviewsData = localStorage.getItem('reviews');
+  if (reviewsData !== null) {
+    data.reviews = JSON.parse(reviewsData);
+  }
 });
 
 $footerStar.addEventListener('click', function(){
