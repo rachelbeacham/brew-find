@@ -137,7 +137,7 @@ function removeFromFavorites() {
     }
   }
 }
-
+/*
 function viewSwapping(data) {
    if (data.view === 'welcome') {
      $headerName.textContent = 'Brew Find';
@@ -183,7 +183,28 @@ function viewSwapping(data) {
     $dataViews[4].className = 'data-view';
   }
 }
+*/
 
+function viewSwapping(data) {
+  var view = data.view;
+  for (var i = 0; i < $dataViews.length; i++) {
+    $dataViews[i].className = 'data-view hidden';
+    if (view === $dataViews[i].getAttribute('data-view')) {
+      $dataViews[i].className = 'data-view';
+      if ($dataViews[i].getAttribute('data-view') === 'favorites') {
+      $headerName.textContent = 'Favorites';
+      $favoritesList.innerHTML = '';
+      for (var i = 0; i < data.favorites.length; i++) {
+        $favoritesList.appendChild(renderFavorites(data.favorites[i]))
+        }
+      } else if ($dataViews[i].getAttribute('data-view') === 'brewery-options') {
+        $headerName.textContent = 'Breweries in ' + data.location;
+      } else {
+        $headerName.textContent = 'Brew Find';
+        }
+      }
+    }
+  }
 function renderOptions(data) {
     var $colHalfDiv = document.createElement('div');
     $colHalfDiv.className = 'col-half';
