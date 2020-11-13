@@ -16,7 +16,7 @@ var $favoritesList = document.querySelector('.favorites-list');
 var $reviewForm = document.querySelector('.review-form');
 var $reviewerName = document.querySelector('#name');
 var $reviewText = document.querySelector('#review');
-
+var $reviewSection = document.querySelector('.review-section');
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -112,6 +112,7 @@ function formSubmitted(e) {
   xhr.send();
 }
 function optionSelected(e) {
+  $reviewSection.innerHTML = '';
   $favoritesButton.textContent = 'Add to favorites';
   $favoritesButton.className = 'favorites-button';
   $reviewButton.textContent = 'Write a review';
@@ -126,7 +127,6 @@ function optionSelected(e) {
       $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
       $selectedBreweryWebsite.setAttribute('href', data.brewArray[i].website_url);
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
-     // $numberOfReviews.textContent = data.selected.numberOfReviews + ' Reviews'
     }
   }
   for (var j = 0; j < data.favorites.length; j++) {
@@ -140,6 +140,22 @@ function optionSelected(e) {
       $selectedBreweryPhone.textContent = data.favorites[j].phone;
     } else {
       data.selected.favorited = false;
+    }
+  }
+  for (var k = 0; k < data.reviews.length; k++) {
+    if (data.selected.name === data.reviews[k].breweryReviewed) {
+      var $reviewLabelBox = document.createElement('div');
+      $reviewLabelBox.className = 'align-left';
+
+      var $reviewLabel = document.createElement('h2');
+      $reviewLabel.className = 'gray-text';
+      $reviewLabel.textContent = "Reviews you've sent:";
+
+      $reviewLabelBox.appendChild($reviewLabel);
+
+      $reviewSection.appendChild($reviewLabelBox);
+
+      $reviewSection.appendChild(renderReviews(data.reviews[k]))
     }
   }
   viewSwapping(data);
@@ -167,53 +183,6 @@ function removeFromFavorites() {
     }
   }
 }
-/*
-function viewSwapping(data) {
-   if (data.view === 'welcome') {
-     $headerName.textContent = 'Brew Find';
-     $dataViews[0].className = 'data-view';
-     $dataViews[1].className = 'data-view hidden';
-     $dataViews[2].className = 'data-view hidden';
-     $dataViews[3].className = 'data-view hidden';
-     $dataViews[4].className = 'data-view hidden';
-   }
-   if (data.view === 'brewery-options') {
-    $headerName.textContent = 'Breweries in '+ data.location;
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view';
-    $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view hidden';
-    $dataViews[4].className = 'data-view hidden';
-   }
-  if (data.view === 'brewery-details') {
-    $headerName.textContent = 'Brew Find';
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view hidden';
-    $dataViews[2].className = 'data-view';
-    $dataViews[3].className = 'data-view hidden'
-    $dataViews[4].className = 'data-view hidden';
-  }
-  if (data.view === 'favorites') {
-    $headerName.textContent = 'Favorites';
-    $favoritesList.innerHTML = '';
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view hidden';
-    $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view';
-    $dataViews[4].className = 'data-view hidden';
-    for (var i = 0; i < data.favorites.length; i++) {
-      $favoritesList.appendChild(renderFavorites(data.favorites[i]))
-    }
-  }
-  if (data.view === 'review-form') {
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view hidden';
-    $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view hidden';
-    $dataViews[4].className = 'data-view';
-  }
-}
-*/
 
 function viewSwapping(data) {
   var view = data.view;
@@ -235,6 +204,7 @@ function viewSwapping(data) {
       }
     }
   }
+
 function renderOptions(data) {
     var $colHalfDiv = document.createElement('div');
     $colHalfDiv.className = 'col-half';
@@ -289,6 +259,8 @@ function renderFavorites(data) {
 
 function renderReviews (data) {
   $reviewBox = document.createElement('div');
+  $reviewBox.className = 'review-box';
+
   $reviewParagraph = document.createElement('p');
   $reviewQuote = document.createElement('q');
   $reviewQuote.textContent = data.reviewText;
