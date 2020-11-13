@@ -137,7 +137,8 @@ function viewSwapping(data) {
      $dataViews[0].className = 'data-view';
      $dataViews[1].className = 'data-view hidden';
      $dataViews[2].className = 'data-view hidden';
-     $dataViews[3].className = 'data-view hidden'
+     $dataViews[3].className = 'data-view hidden';
+     $dataViews[4].className = 'data-view hidden';
    }
    if (data.view === 'brewery-options') {
     $headerName.textContent = 'Breweries in '+ data.location;
@@ -145,6 +146,7 @@ function viewSwapping(data) {
     $dataViews[1].className = 'data-view';
     $dataViews[2].className = 'data-view hidden';
     $dataViews[3].className = 'data-view hidden';
+    $dataViews[4].className = 'data-view hidden';
    }
   if (data.view === 'brewery-details') {
     $headerName.textContent = 'Brew Find';
@@ -152,6 +154,7 @@ function viewSwapping(data) {
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view';
     $dataViews[3].className = 'data-view hidden'
+    $dataViews[4].className = 'data-view hidden';
   }
   if (data.view === 'favorites') {
     $headerName.textContent = 'Favorites';
@@ -160,9 +163,17 @@ function viewSwapping(data) {
     $dataViews[1].className = 'data-view hidden';
     $dataViews[2].className = 'data-view hidden';
     $dataViews[3].className = 'data-view';
+    $dataViews[4].className = 'data-view hidden';
     for (var i = 0; i < data.favorites.length; i++) {
       $favoritesList.appendChild(renderFavorites(data.favorites[i]))
     }
+  }
+  if (data.view === 'review-form') {
+    $dataViews[0].className = 'data-view hidden';
+    $dataViews[1].className = 'data-view hidden';
+    $dataViews[2].className = 'data-view hidden';
+    $dataViews[3].className = 'data-view hidden';
+    $dataViews[4].className = 'data-view';
   }
 }
 
