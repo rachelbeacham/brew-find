@@ -22,7 +22,6 @@ $inputForm.addEventListener('submit', formSubmitted);
 
 $reviewForm.addEventListener('submit', function (e){
   e.preventDefault();
-  data.selected.numberOfReviews++
   var newReview = {
     person: $reviewerName.value,
     reviewText: $reviewText.value,
@@ -31,6 +30,8 @@ $reviewForm.addEventListener('submit', function (e){
   data.reviews.push(newReview);
   data.view = 'brewery-details'
   viewSwapping(data);
+  $reviewButton.textContent = 'Your review has been submitted!';
+  $reviewButton.className = 'review-button added'
 })
 
 $optionList.addEventListener('click', optionSelected);
@@ -68,6 +69,8 @@ $backButton.addEventListener('click', function() {
 window.addEventListener('beforeunload', function () {
   var favoritesJson = JSON.stringify(data.favorites);
   localStorage.setItem('favorites', favoritesJson);
+  var reviewsJson = JSON.stringify(data.reviews);
+  localStorage.setItem('reviews', reviewsJson);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -103,6 +106,8 @@ function formSubmitted(e) {
 function optionSelected(e) {
   $favoritesButton.textContent = 'Add to favorites';
   $favoritesButton.className = 'favorites-button';
+  $reviewButton.textContent = 'Write a review';
+  $reviewButton.className = 'review-button';
   if (e.target.className === 'brewName') {
   data.view = 'brewery-details';
   data.selected.name = e.target.textContent
@@ -113,7 +118,7 @@ function optionSelected(e) {
       $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
       $selectedBreweryWebsite.setAttribute('href', data.brewArray[i].website_url);
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
-      $numberOfReviews.textContent = data.selected.numberOfReviews + ' Reviews'
+     // $numberOfReviews.textContent = data.selected.numberOfReviews + ' Reviews'
     }
   }
   for (var j = 0; j < data.favorites.length; j++) {
