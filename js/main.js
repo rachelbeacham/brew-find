@@ -286,3 +286,15 @@ function renderFavorites(data) {
 
   return $favorieColHalfDiv;
 }
+
+function renderReviews (data) {
+  $reviewBox = document.createElement('div');
+  $reviewParagraph = document.createElement('p');
+  $reviewQuote = document.createElement('q');
+  $reviewQuote.textContent = data.reviewText;
+
+  $reviewBox.appendChild($reviewParagraph);
+  $reviewParagraph.appendChild($reviewQuote);
+
+  return $reviewBox;
+}

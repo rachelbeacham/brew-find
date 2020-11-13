@@ -25,6 +25,10 @@ input, textarea {
   border-radius: 5px;
 }
 
+q {
+  font-style: italic;
+}
+
 .search-button {
   background-color: rgba(255,  87,  50, .9);
   color: white;
