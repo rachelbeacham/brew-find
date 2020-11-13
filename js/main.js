@@ -17,6 +17,9 @@ var $reviewForm = document.querySelector('.review-form');
 var $reviewerName = document.querySelector('#name');
 var $reviewText = document.querySelector('#review');
 var $reviewSection = document.querySelector('.review-section');
+var $ratingStarsDiv = document.querySelector('.stars');
+var $ratingStars = document.querySelectorAll('.rating-star');
+var $rateExperience = document.querySelector('.rate-experience');
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -91,6 +94,20 @@ document.addEventListener('DOMContentLoaded', function () {
 $footerStar.addEventListener('click', function(){
   data.view = 'favorites';
   viewSwapping(data);
+})
+
+$ratingStarsDiv.addEventListener('click', function(e){
+  if (e.target.className === 'fas fa-star rating-star') {
+   var starSelected = e.target.getAttribute('star');
+
+   for (var i = 0; i < $ratingStars.length; i++) {
+     if ($ratingStars[i].getAttribute ('star') <= starSelected) {
+       $ratingStars[i].className = 'fas fa-star rating-star star-red';
+     } else {
+       $ratingStars[i].className = 'fas fa-star rating-star star-gray';
+     }
+   }
+  }
 })
 
 function formSubmitted(e) {
