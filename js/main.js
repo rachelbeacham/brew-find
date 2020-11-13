@@ -61,8 +61,12 @@ $reviewButton.addEventListener('click', function(){
 })
 
 $backButton.addEventListener('click', function() {
-  data.view = 'brewery-options';
-  viewSwapping(data);
+  if (data.location !== '') {
+    data.view = 'brewery-options';
+  } else {
+    data.view = 'favorites';
+  }
+  viewSwapping(data)
 
 });
 
