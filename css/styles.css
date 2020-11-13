@@ -20,8 +20,9 @@ footer {
 }
 input, textarea {
   resize: none;
-  margin: 1rem 0;
+  margin: .5rem 0 1rem;
   border: 1px solid #AAAAAA;
+  border-radius: 5px;
 }
 
 .search-button {
@@ -112,7 +113,7 @@ input, textarea {
 .add-favorites-link {
   color: #0645AD;
 }
-.col-half {
+.col-half:not(:lastChild) {
   border-bottom: 1px solid rgba(170, 170, 170, .8);
   margin: 1rem 0;
   padding-bottom: 2rem;
@@ -142,4 +143,16 @@ input, textarea {
 }
 .rate-experience {
   color: #FF5732;
+}
+.review-submit {
+  justify-content: flex-end;
+}
+.review-submit-button {
+  background-color: rgba(255,  87,  50, .9);
+  color: white;
+  border: none;
+  border-radius: 10%;
+  font-weight: 500;
+  padding: .5rem 1rem;
+  font-size: 1.1rem;
 }

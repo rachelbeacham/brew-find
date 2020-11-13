@@ -74,15 +74,17 @@
       </div>
     </div>
 
-    <div class="data-view" data-view="review-form">
+    <div class="data-view hidden" data-view="review-form">
       <h2 class="gray-text text-center">Write a Review!</h2>
       <form class="review-form">
           <div class="col-half column">
-            <label for="name">Name:</label>
+            <label class="gray-text" for="name">Name:</label>
             <input required name="name" id="name" type="text">
-            <label for="review">Tell us about your experience:</label>
+            <label class="gray-text" for="review">Tell us about your experience:</label>
             <textarea required name="review" id="review" type="text" rows="6"></textarea>
-            <button type="submit">Submit</button>
+            <div class="review-submit row">
+              <button class="review-submit-button" type="submit">Submit</button>
+            </div>
           </div>
       </form>
     </div>
