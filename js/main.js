@@ -9,11 +9,33 @@ var $selectedBreweryPhone = document.querySelector('.selected-brewery-phone');
 var $footerSearch = document.querySelector('.footer-search');
 var $footerStar = document.querySelector('.footer-star');
 var $favoritesButton = document.querySelector('.favorites-button');
+var $reviewButton = document.querySelector('.review-button')
 var $backButton = document.querySelector('.back-button');
 var $headerName = document.querySelector('.header-name');
-var $favoritesList = document.querySelector('.favorites-list')
+var $favoritesList = document.querySelector('.favorites-list');
+var $reviewForm = document.querySelector('.review-form');
+var $reviewerName = document.querySelector('#name');
+var $reviewText = document.querySelector('#review');
+var $reviewSection = document.querySelector('.review-section');
+var $ratingStarsDiv = document.querySelector('.stars');
+var $ratingStars = document.querySelectorAll('.rating-star');
+var $rateExperience = document.querySelector('.rate-experience');
 
 $inputForm.addEventListener('submit', formSubmitted);
+
+$reviewForm.addEventListener('submit', function (e){
+  e.preventDefault();
+  var newReview = {
+    person: $reviewerName.value,
+    reviewText: $reviewText.value,
+    breweryReviewed: data.selected.name
+  };
+  data.reviews.push(newReview);
+  data.view = 'brewery-details'
+  viewSwapping(data);
+  $reviewButton.textContent = 'Your review has been submitted!';
+  $reviewButton.className = 'review-button added'
+})
 
 $optionList.addEventListener('click', optionSelected);
 
@@ -35,15 +57,29 @@ $favoritesButton.addEventListener('click', function(){
   }
 });
 
-$backButton.addEventListener('click', function() {
-  data.view = 'brewery-options';
+$reviewButton.addEventListener('click', function(){
+  data.view = 'review-form';
   viewSwapping(data);
+  console.log(data.selected.name)
+})
+
+$backButton.addEventListener('click', function() {
+  if (data.location !== '') {
+    data.view = 'brewery-options';
+  } else {
+    data.view = 'favorites';
+  }
+  viewSwapping(data)
 
 });
 
 window.addEventListener('beforeunload', function () {
   var favoritesJson = JSON.stringify(data.favorites);
   localStorage.setItem('favorites', favoritesJson);
+  var reviewsJson = JSON.stringify(data.reviews);
+  localStorage.setItem('reviews', reviewsJson);
+  var ratingsJson = JSON.stringify(data.ratings);
+  localStorage.setItem('ratings', ratingsJson);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -51,12 +87,56 @@ document.addEventListener('DOMContentLoaded', function () {
   if (favoritesData !== null) {
     data.favorites = JSON.parse(favoritesData);
   }
+  var reviewsData = localStorage.getItem('reviews');
+  if (reviewsData !== null) {
+    data.reviews = JSON.parse(reviewsData);
+  }
+  var ratingsData = localStorage.getItem('ratings');
+  if (ratingsData !== null) {
+    data.ratings = JSON.parse(ratingsData);
+  }
 });
 
 $footerStar.addEventListener('click', function(){
   data.view = 'favorites';
   viewSwapping(data);
 })
+
+$ratingStarsDiv.addEventListener('click', starClicked)
+
+function starClicked(e) {
+  if (e.target.tagName === 'I') {
+    var starSelected = e.target.getAttribute('star');
+    var newRating = {}
+    newRating.breweryRated = data.selected.name
+    newRating.rating = starSelected
+    data.ratings.push(newRating);
+    updateRatingStars();
+    }
+  }
+
+function updateRatingStars() {
+  for (var j = 0; j < data.ratings.length; j++) {
+    if (data.ratings[j].breweryRated === data.selected.name) {
+      var current = data.ratings[j];
+      $rateExperience.textContent = 'Thank you for rating!'
+      for (var i = 0; i < $ratingStars.length; i++) {
+        if ($ratingStars[i].getAttribute('star') <= current.rating) {
+        $ratingStars[i].className = 'fas fa-star rating-star star-red';
+        } else {
+          $ratingStars[i].className = 'fas fa-star rating-star star-gray';
+        }
+      }
+      break;
+    }
+    else {
+      $rateExperience.textContent = 'Please rate your experience!'
+      for (var k = 0; k < $ratingStars.length; k++) {
+      $ratingStars[k].className = 'fas fa-star rating-star star-gray';
+      }
+    }
+  }
+}
 
 function formSubmitted(e) {
   e.preventDefault();
@@ -78,8 +158,12 @@ function formSubmitted(e) {
 }
 
 function optionSelected(e) {
+  $reviewSection.innerHTML = '';
   $favoritesButton.textContent = 'Add to favorites';
   $favoritesButton.className = 'favorites-button';
+  $reviewButton.textContent = 'Write a review';
+  $reviewButton.className = 'review-button';
+  $ratingStars.className = 'fas fa-star rating-star';
   if (e.target.className === 'brewName') {
   data.view = 'brewery-details';
   data.selected.name = e.target.textContent
@@ -105,7 +189,22 @@ function optionSelected(e) {
       data.selected.favorited = false;
     }
   }
+  for (var k = 0; k < data.reviews.length; k++) {
+    if (data.selected.name === data.reviews[k].breweryReviewed) {
+      var $reviewLabelBox = document.createElement('div');
+      $reviewLabelBox.className = 'align-left';
+
+      var $reviewLabel = document.createElement('h2');
+      $reviewLabel.className = 'gray-text';
+      $reviewLabel.textContent = "Reviews you've sent:";
+
+      $reviewLabelBox.appendChild($reviewLabel);
+      $reviewSection.appendChild($reviewLabelBox);
+      $reviewSection.appendChild(renderReviews(data.reviews[k]))
+    }
+  }
   viewSwapping(data);
+  updateRatingStars();
   }
 }
 
@@ -132,39 +231,25 @@ function removeFromFavorites() {
 }
 
 function viewSwapping(data) {
-   if (data.view === 'welcome') {
-     $headerName.textContent = 'Brew Find';
-     $dataViews[0].className = 'data-view';
-     $dataViews[1].className = 'data-view hidden';
-     $dataViews[2].className = 'data-view hidden';
-     $dataViews[3].className = 'data-view hidden'
-   }
-   if (data.view === 'brewery-options') {
-    $headerName.textContent = 'Breweries in '+ data.location;
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view';
-    $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view hidden';
-   }
-  if (data.view === 'brewery-details') {
-    $headerName.textContent = 'Brew Find';
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view hidden';
-    $dataViews[2].className = 'data-view';
-    $dataViews[3].className = 'data-view hidden'
-  }
-  if (data.view === 'favorites') {
-    $headerName.textContent = 'Favorites';
-    $favoritesList.innerHTML = '';
-    $dataViews[0].className = 'data-view hidden';
-    $dataViews[1].className = 'data-view hidden';
-    $dataViews[2].className = 'data-view hidden';
-    $dataViews[3].className = 'data-view';
-    for (var i = 0; i < data.favorites.length; i++) {
-      $favoritesList.appendChild(renderFavorites(data.favorites[i]))
+  var view = data.view;
+  for (var i = 0; i < $dataViews.length; i++) {
+    $dataViews[i].className = 'data-view hidden';
+    if (view === $dataViews[i].getAttribute('data-view')) {
+      $dataViews[i].className = 'data-view';
+      if ($dataViews[i].getAttribute('data-view') === 'favorites') {
+      $headerName.textContent = 'Favorites';
+      $favoritesList.innerHTML = '';
+      for (var i = 0; i < data.favorites.length; i++) {
+        $favoritesList.appendChild(renderFavorites(data.favorites[i]))
+        }
+      } else if ($dataViews[i].getAttribute('data-view') === 'brewery-options') {
+        $headerName.textContent = 'Breweries in ' + data.location;
+      } else {
+        $headerName.textContent = 'Brew Find';
+        }
+      }
     }
   }
-}
 
 function renderOptions(data) {
     var $colHalfDiv = document.createElement('div');
@@ -216,4 +301,18 @@ function renderFavorites(data) {
   $favoriteBrewInfoCol.appendChild($favoriteBrewAddress);
 
   return $favorieColHalfDiv;
+}
+
+function renderReviews (data) {
+  $reviewBox = document.createElement('div');
+  $reviewBox.className = 'review-box';
+
+  $reviewParagraph = document.createElement('p');
+  $reviewQuote = document.createElement('q');
+  $reviewQuote.textContent = data.reviewText;
+
+  $reviewBox.appendChild($reviewParagraph);
+  $reviewParagraph.appendChild($reviewQuote);
+
+  return $reviewBox;
 }

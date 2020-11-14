@@ -41,26 +41,31 @@
     </div>
 
     <div class="data-view hidden" data-view="brewery-details">
-      <div class="column text-center">
+      <div class="column text-center" id="detailsPage">
         <h1 class="selected-brewery-name gray-text"></h1>
         <h2 class="selected-brewery-address gray-text"></h2>
         <h2><a class="selected-brewery-website gray-text"></a></h2>
         <h2 class="selected-brewery-phone gray-text"></h2>
-        <div class="row stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+        <div class="column">
+          <h2 class="rate-experience">Please rate your experience!</h2>
+          <div class="row stars">
+            <i class="fas fa-star rating-star" star="1"></i>
+            <i class="fas fa-star rating-star" star="2"></i>
+            <i class="fas fa-star rating-star" star="3"></i>
+            <i class="fas fa-star rating-star" star="4"></i>
+            <i class="fas fa-star rating-star" star="5"></i>
+          </div>
         </div>
-        <h2 class="blue-text">48 Reviews</h2>
-        <div class="col">
+        <div>
           <button class="favorites-button">Add to favorites</button>
           <button class="review-button">Write a review</button>
         </div>
         <div class="back-button">
           <i class="fas fa-chevron-left"></i>
         </div>
+        <section class="review-section">
+
+        </section>
       </div>
     </div>
 
@@ -68,6 +73,23 @@
 
       <div class="row favorites-list">
 
+      </div>
+    </div>
+
+    <div class="data-view hidden" data-view="review-form">
+      <div class="write-review-div">
+        <h2 class="gray-text text-center">Write a Review!</h2>
+        <form class="review-form">
+          <div class="col-half review-inputs column">
+            <label class="gray-text" for="name">Name:</label>
+            <input required name="name" id="name" type="text" class="reviewer-name">
+            <label class="gray-text" for="review">Tell us about your experience:</label>
+            <textarea required name="review" id="review" type="text" class="review-text" rows="6"></textarea>
+            <div class="review-submit row">
+              <button class="review-submit-button" type="submit">Submit</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 

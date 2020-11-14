@@ -18,6 +18,17 @@ header {
 footer {
   bottom: 0;
 }
+input, textarea {
+  resize: none;
+  margin: .5rem 0 1rem;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+}
+
+q {
+  font-style: italic;
+}
+
 .search-button {
   background-color: rgba(255,  87,  50, .9);
   color: white;
@@ -41,7 +52,9 @@ footer {
 .align-center {
   align-items: center;
 }
-
+.align-left {
+  text-align: left;
+}
 .text-center {
   text-align: center
 }
@@ -65,7 +78,9 @@ footer {
 .city-input::placeholder,
 .city-input:focus,
 .favorites-button:focus,
-.review-button:focus {
+.review-button:focus,
+.review-text:focus,
+.reviewer-name:focus {
   color: #AAAAAA;
   padding-left: .4rem;
   outline: none;
@@ -117,10 +132,14 @@ footer {
   font-size: 2.5rem;
   padding: 10px;
 }
+.stars {
+  color: #F2EFEF;
+}
+
 .stars i {
-  color: #FF5732;
   margin: 1rem .5rem;
 }
+
 .brewName {
   font-size: 1.1rem;
   text-decoration: underline;
@@ -131,6 +150,39 @@ footer {
   margin: 1rem 0;
 }
 .favorites-list,
-.option-list {
+.option-list,
+.write-review-div {
   margin-top: 7rem;
+}
+.rate-experience {
+  color: #FF5732;
+}
+.review-submit {
+  justify-content: flex-end;
+}
+.review-submit-button {
+  background-color: rgba(255,  87,  50, .9);
+  color: white;
+  border: none;
+  border-radius: 10%;
+  font-weight: 500;
+  padding: .5rem 1rem;
+  font-size: 1.1rem;
+}
+.review-inputs {
+  border: none;
+}
+.review-box {
+  background-color: #F2EFEF;
+  border: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .25);
+  color: #FF5732;
+  margin-bottom: 1.3rem;
+}
+
+.star-red {
+  color: #FF5732;
+}
+.star-gray {
+  color: #AAAAAA;
 }

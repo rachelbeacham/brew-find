@@ -5,7 +5,9 @@ var data = {
   brewArray: [],
   selected: {
     name: '',
-    favorited: false
+    favorited: false,
   },
-  favorites: []
+  favorites: [],
+  reviews: [],
+  ratings: []
 }
