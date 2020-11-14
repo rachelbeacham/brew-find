@@ -112,13 +112,14 @@ function starClicked(e) {
     newRating.rating = starSelected
     data.ratings.push(newRating);
     updateRatingStars();
+    }
   }
-};
 
 function updateRatingStars() {
   for (var j = 0; j < data.ratings.length; j++) {
     if (data.ratings[j].breweryRated === data.selected.name) {
       var current = data.ratings[j];
+      $rateExperience.textContent = 'Thank you for rating!'
       for (var i = 0; i < $ratingStars.length; i++) {
         if ($ratingStars[i].getAttribute('star') <= current.rating) {
         $ratingStars[i].className = 'fas fa-star rating-star star-red';
@@ -129,6 +130,7 @@ function updateRatingStars() {
       break;
     }
     else {
+      $rateExperience.textContent = 'Please rate your experience!'
       for (var k = 0; k < $ratingStars.length; k++) {
       $ratingStars[k].className = 'fas fa-star rating-star star-gray';
       }
@@ -205,8 +207,6 @@ function optionSelected(e) {
   updateRatingStars();
   }
 }
-
-
 
 function addToFavorites() {
   $favoritesButton.textContent = 'Remove from favorites';
