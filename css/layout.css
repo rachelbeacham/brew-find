@@ -7,6 +7,7 @@ form {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .col-half {
   display: flex;
   justify-content: center;
@@ -31,5 +32,10 @@ form {
 @media only screen and (min-width: 540px) {
   .col-half {
     width: 50%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .col-half {
+    width: calc(100% / 3)
   }
 }

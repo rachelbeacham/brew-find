@@ -186,3 +186,11 @@ q {
 .star-gray {
   color: #AAAAAA;
 }
+
+button:hover,
+input:hover,
+textarea:hover,
+i:hover,
+.brewName:hover {
+  cursor: pointer;
+}

@@ -20,6 +20,8 @@ var $reviewSection = document.querySelector('.review-section');
 var $ratingStarsDiv = document.querySelector('.stars');
 var $ratingStars = document.querySelectorAll('.rating-star');
 var $rateExperience = document.querySelector('.rate-experience');
+var $welcomeGreeting = document.querySelector('.welcome-greeting');
+var $welcomeMessage = document.querySelector('.welcome-message');
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -35,6 +37,7 @@ $reviewForm.addEventListener('submit', function (e){
   viewSwapping(data);
   $reviewButton.textContent = 'Your review has been submitted!';
   $reviewButton.className = 'review-button added'
+  $reviewForm.reset();
 })
 
 $optionList.addEventListener('click', optionSelected);
@@ -60,7 +63,6 @@ $favoritesButton.addEventListener('click', function(){
 $reviewButton.addEventListener('click', function(){
   data.view = 'review-form';
   viewSwapping(data);
-  console.log(data.selected.name)
 })
 
 $backButton.addEventListener('click', function() {
@@ -138,23 +140,43 @@ function updateRatingStars() {
   }
 }
 
+
 function formSubmitted(e) {
   e.preventDefault();
   data.location = $cityInput.value
-  data.view = 'brewery-options';
-  viewSwapping(data);
-  $inputForm.reset();
   var xhr = new XMLHttpRequest();
+  $inputForm.reset();
   xhr.open('GET', 'https://api.openbrewerydb.org/breweries?by_city=' + data.location, true);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.brewArray = xhr.response;
+    if (data.brewArray.length == 0) {
+      data.view = 'welcome';
+      viewSwapping(data);
+      $welcomeGreeting.textContent = 'Uh-Oh!'
+      $welcomeMessage.textContent = 'It looks like we were unable to find any results, please try again.'
+    } else {
     for (var i = 0; i < data.brewArray.length; i++) {
-      if (data.brewArray[i].street !== '' && data.brewArray[i].phone !== '' && data.brewArray[i].website_url !== '' && data.brewArray[i].name !== '')
+      if (data.brewArray[i].street !== '' && data.brewArray[i].phone !== '' && data.brewArray[i].website_url !== '' && data.brewArray[i].name !== '') {
       $optionList.appendChild(renderOptions(data.brewArray[i]))
+      }
+    }
+    data.view = 'brewery-options';
+    viewSwapping(data);
     }
   });
+  xhr.addEventListener('error', function(){
+    $welcomeGreeting.textContent = 'Uh-Oh!'
+    $welcomeMessage.textContent = 'It looks like we were unable to find any results, please try again.'
+  });
+  xhr.onprogress = loading();
   xhr.send();
+}
+
+function loading () {
+  $welcomeGreeting.textContent = 'Loading...'
+  $welcomeMessage.textContent = '';
+  $inputForm.reset();
 }
 
 function optionSelected(e) {
@@ -172,7 +194,6 @@ function optionSelected(e) {
       $selectedBreweryName.textContent = data.brewArray[i].name;
       $selectedBreweryAddress.textContent = data.brewArray[i].street + ', ' + data.brewArray[i].city + ', ' + data.brewArray[i].state + ' ' + data.brewArray[i].postal_code;
       $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
-      $selectedBreweryWebsite.setAttribute('href', data.brewArray[i].website_url);
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
     }
   }
@@ -196,7 +217,7 @@ function optionSelected(e) {
 
       var $reviewLabel = document.createElement('h2');
       $reviewLabel.className = 'gray-text';
-      $reviewLabel.textContent = "Reviews you've sent:";
+      $reviewLabel.textContent = "Review you sent to this brewery:";
 
       $reviewLabelBox.appendChild($reviewLabel);
       $reviewSection.appendChild($reviewLabelBox);
@@ -243,7 +264,11 @@ function viewSwapping(data) {
         $favoritesList.appendChild(renderFavorites(data.favorites[i]))
         }
       } else if ($dataViews[i].getAttribute('data-view') === 'brewery-options') {
-        $headerName.textContent = 'Breweries in ' + data.location;
+        $headerName.textContent = 'Breweries in ' + capitalizeWords(data.location);
+      } else if ($dataViews[i].getAttribute('data-view') === 'welcome') {
+        $welcomeGreeting.textContent = "Let's Grab a drink!";
+        $welcomeMessage.textContent = "Enter your city for a list of all the great brewery options near you!";
+        $headerName.textContent = 'Brew Find'
       } else {
         $headerName.textContent = 'Brew Find';
         }
@@ -315,4 +340,17 @@ function renderReviews (data) {
   $reviewParagraph.appendChild($reviewQuote);
 
   return $reviewBox;
+}
+
+function capitalizeWords(string) {
+  var firstChar = string[0].toUpperCase();
+  var phrase = '';
+  for (var i = 1; i < string.length; i++) {
+    phrase += string[i].toLowerCase();
+    if (string[i] === ' ') {
+      phrase += string[i + 1].toUpperCase();
+      i++;
+    }
+  }
+  return firstChar + phrase;
 }
