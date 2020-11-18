@@ -22,6 +22,7 @@ var $ratingStars = document.querySelectorAll('.rating-star');
 var $rateExperience = document.querySelector('.rate-experience');
 var $welcomeGreeting = document.querySelector('.welcome-greeting');
 var $welcomeMessage = document.querySelector('.welcome-message');
+var $emptyFavoritesMessage = document.querySelector('.empty-favorites-message')
 
 $inputForm.addEventListener('submit', formSubmitted);
 
@@ -259,15 +260,19 @@ function viewSwapping(data) {
       $dataViews[i].className = 'data-view';
       if ($dataViews[i].getAttribute('data-view') === 'favorites') {
       $headerName.textContent = 'Favorites';
-      $favoritesList.innerHTML = '';
       if (data.favorites.length !== 0) {
-      for (var f = 0; f < data.favorites.length; f++) {
-        $favoritesList.appendChild(renderFavorites(data.favorites[f]))
-      }
-      } else {
         $favoritesList.innerHTML = '';
+        for (var f = 0; f < data.favorites.length; f++) {
+          $emptyFavoritesMessage.className = 'gray-text empty-favorites-message hidden'
+          $favoritesList.appendChild(renderFavorites(data.favorites[f]))
+        }
+      }
+       else {
+        $emptyFavoritesMessage.className = 'gray-text empty-favorites-message';
+        $favoritesList.innerHTML = ''
+      }
     }
-      } else if ($dataViews[i].getAttribute('data-view') === 'brewery-options') {
+       else if ($dataViews[i].getAttribute('data-view') === 'brewery-options') {
         $headerName.textContent = 'Breweries in ' + capitalizeWords(data.location);
       } else if ($dataViews[i].getAttribute('data-view') === 'welcome') {
         $welcomeGreeting.textContent = "Let's Grab a drink!";
