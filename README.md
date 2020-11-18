@@ -33,10 +33,10 @@ Try the application live at https://rachelbeacham.github.io/ajax-project/
 
 ## Preview:
 
-![Search Page](/search_page.png)
-![Brewery Options](/brewery_options.png)
-![Brewery Details](/brewery_details.png)
-![Favorites List](/favorites_list.png)
-![Rate & Review](/rate_and_review.png)
+![Search Page](/images/search_page.png)
+![Brewery Options](/images/brewery_options.png)
+![Brewery Details](/images/brewery_details.png)
+![Favorites List](/images/favorites_list.png)
+![Rate & Review](/images/rate_and_review.png)
 
 
