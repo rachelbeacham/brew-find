@@ -260,9 +260,13 @@ function viewSwapping(data) {
       if ($dataViews[i].getAttribute('data-view') === 'favorites') {
       $headerName.textContent = 'Favorites';
       $favoritesList.innerHTML = '';
-      for (var i = 0; i < data.favorites.length; i++) {
-        $favoritesList.appendChild(renderFavorites(data.favorites[i]))
-        }
+      if (data.favorites.length !== 0) {
+      for (var f = 0; f < data.favorites.length; f++) {
+        $favoritesList.appendChild(renderFavorites(data.favorites[f]))
+      }
+      } else {
+        $favoritesList.innerHTML = '';
+    }
       } else if ($dataViews[i].getAttribute('data-view') === 'brewery-options') {
         $headerName.textContent = 'Breweries in ' + capitalizeWords(data.location);
       } else if ($dataViews[i].getAttribute('data-view') === 'welcome') {
@@ -303,6 +307,7 @@ function renderOptions(data) {
 }
 
 function renderFavorites(data) {
+
   var $favorieColHalfDiv = document.createElement('div');
   $favorieColHalfDiv.className = 'col-half';
 
