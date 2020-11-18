@@ -24,7 +24,7 @@ Try the application live at https://rachelbeacham.github.io/ajax-project/
 ## Development:
 
 1. Clone the repository
-    1. ``` git clone https://github.com/rachelbeacham/ajax-project.git```
+    1. ``` git clone https://github.com/rachelbeacham/brew-find.git```
           ```cd ajax-project ```
 1. Install all dependencies with NPM.
     1. ```npm ci # ``` or  ``` npm install ``` if that fails
