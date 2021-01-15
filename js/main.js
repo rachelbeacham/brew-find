@@ -195,7 +195,9 @@ function optionSelected(e) {
       $selectedBreweryName.textContent = data.brewArray[i].name;
       $selectedBreweryAddress.textContent = data.brewArray[i].street + ', ' + data.brewArray[i].city + ', ' + data.brewArray[i].state + ' ' + data.brewArray[i].postal_code;
       $selectedBreweryWebsite.textContent = data.brewArray[i].website_url;
+      $selectedBreweryWebsite.setAttribute("href", data.brewArray[i].website_url);
       $selectedBreweryPhone.textContent = 'Phone number: ' + data.brewArray[i].phone;
+      $selectedBreweryPhone.setAttribute("href", "tel:" + data.brewArray[i].phone);
     }
   }
   for (var j = 0; j < data.favorites.length; j++) {
